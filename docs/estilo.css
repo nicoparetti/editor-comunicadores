@@ -285,3 +285,4 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
 }
 @media (max-width:900px){.adapta{gap:14px;padding:26px 22px}.adapta svg{width:54px;height:54px}}
 @media (max-width:900px){.onda i{max-height:52px}.pieza:nth-child(2) .muestra{justify-content:center;gap:4px}}
+@media (max-width:900px){.pasos code{white-space:normal;word-break:break-all;font-size:14px}}
