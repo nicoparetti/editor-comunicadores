@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Descarga gratis · Editar con sentido</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="brillo">
+<div class="envoltura">
+  <header class="arriba"><a class="marca" href="index.html">Editar con <span>sentido</span></a></header>
+
+  <div class="caja">
+    <span class="etiqueta">Último paso</span>
+    <h2 style="font-size:38px">Te la regalo.<br><em>¿Dónde te encuentro?</em></h2>
+    <p style="color:var(--suave);font-size:16px">Déjame tus datos y te muestro al instante cómo instalarla. También te llega por correo, por si la necesitas después.</p>
+
+    <form id="form" novalidate>
+      <label for="nombre">Nombre y apellido</label>
+      <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="email" autocomplete="email" required>
+
+      <label for="numero">Celular (con WhatsApp)</label>
+      <div class="tel">
+        <select id="codigo" name="codigo" aria-label="Código de país"></select>
+        <input type="tel" id="numero" name="numero" autocomplete="tel-national" placeholder="Código de área y número" required>
+      </div>
+
+      <label class="check"><input type="checkbox" id="acepto" required> <span>Acepto que Nicolás Paretti guarde estos datos para enviarme la herramienta, novedades y contenido. Puedo pedir que los borre cuando quiera.</span></label>
+
+      <p class="error" id="error"></p>
+      <button class="boton" type="submit" id="enviar">Quiero la herramienta</button>
+    </form>
+  </div>
+</div>
+
+<script src="origen.js"></script>
+<script>
+var PAISES = [
+  ["Argentina","+54"],["México","+52"],["Colombia","+57"],["Chile","+56"],["Perú","+51"],
+  ["Venezuela","+58"],["Ecuador","+593"],["Bolivia","+591"],["Paraguay","+595"],["Uruguay","+598"],
+  ["Guatemala","+502"],["Honduras","+504"],["El Salvador","+503"],["Nicaragua","+505"],["Costa Rica","+506"],
+  ["Panamá","+507"],["Cuba","+53"],["Rep. Dominicana","+1"],["Puerto Rico","+1"],["Estados Unidos","+1"],
+  ["Canadá","+1"],["España","+34"],["Brasil","+55"],["Otro país","+"]
+];
+var sel = document.getElementById("codigo");
+PAISES.forEach(function (p, i) {
+  var o = document.createElement("option");
+  o.value = i; o.textContent = p[0] + " " + (p[1] === "+" ? "" : p[1]);
+  sel.appendChild(o);
+});
+
+document.getElementById("form").addEventListener("submit", function (ev) {
+  ev.preventDefault();
+  var err = document.getElementById("error");
+  var nombre = document.getElementById("nombre").value.trim();
+  var email = document.getElementById("email").value.trim();
+  var numero = document.getElementById("numero").value.replace(/[^\d+]/g, "");
+  var pais = PAISES[sel.value];
+  var fallo = "";
+  if (nombre.length < 3) fallo = "Escribe tu nombre y apellido.";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fallo = "Revisa tu correo electrónico.";
+  else if (numero.replace(/\D/g, "").length < 7) fallo = "Escribe tu celular con el código de área.";
+  else if (!document.getElementById("acepto").checked) fallo = "Necesito que aceptes para enviarte la herramienta.";
+  if (fallo) { err.textContent = fallo; err.style.display = "block"; return; }
+  err.style.display = "none";
+
+  var btn = document.getElementById("enviar");
+  btn.disabled = true; btn.textContent = "Enviando…";
+  var datos = new URLSearchParams({
+    nombre: nombre, email: email,
+    telefono: (pais[1] === "+" ? "" : pais[1] + " ") + numero,
+    pais: pais[0], origen: window.ORIGEN
+  });
+  var destino = "instalar.html?origen=" + encodeURIComponent(window.ORIGEN);
+  try { localStorage.setItem("registrado", "1"); } catch (e) {}
+  if (!CONFIG.urlFormulario) { location.href = destino; return; }
+  fetch(CONFIG.urlFormulario, { method: "POST", mode: "no-cors", body: datos })
+    .catch(function () {})
+    .finally(function () { location.href = destino; });
+});
+</script>
+</body>
+</html>

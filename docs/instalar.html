@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Instala la herramienta · Editar con sentido</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="brillo">
+<div class="envoltura" style="max-width:900px">
+  <header class="arriba"><a class="marca" href="index.html">Editar con <span>sentido</span></a></header>
+
+  <div style="text-align:center;padding:40px 0 30px">
+    <span class="etiqueta">¡Listo! Es tuya</span>
+    <h1 style="font-size:clamp(36px,5vw,58px)">Instálala en <em>cinco minutos</em></h1>
+    <p style="color:var(--suave);margin-top:16px">Mira el video y sigue los pasos. También te los mandé por correo.</p>
+  </div>
+
+  <div class="video" id="video">
+    <div class="pendiente"><strong style="color:var(--txt)">Video de instalación</strong><span>Muy pronto aquí. Mientras tanto, sigue los pasos de abajo.</span></div>
+  </div>
+
+  <!-- Pedido según el origen: a quien viene de Instagram, YouTube; a quien viene de YouTube, Instagram -->
+  <div class="destacado" id="pedido-yt" style="display:none">
+    <div><h3>Suscríbete al canal</h3><p>Ahí están los tutoriales y las novedades de la herramienta.</p></div>
+    <a class="boton" id="btn-yt" target="_blank" rel="noopener">Suscribirme en YouTube</a>
+  </div>
+  <div class="destacado" id="pedido-ig" style="display:none">
+    <div><h3>Sígueme en Instagram</h3><p>Ahí comparto ejemplos, ideas y la comunidad de personas con un mensaje.</p></div>
+    <a class="boton" id="btn-ig" target="_blank" rel="noopener">Seguir en Instagram</a>
+  </div>
+
+  <section style="padding:40px 0 60px">
+    <span class="etiqueta">Paso a paso</span>
+    <h2>Cómo instalarla</h2>
+    <ol class="pasos">
+      <li><strong>Ten Claude Pro y la app de escritorio.</strong><br><span style="color:var(--suave)">Descárgala en <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a> e inicia sesión con tu cuenta Pro.</span></li>
+      <li><strong>Agrega la herramienta.</strong><br><span style="color:var(--suave)">En Claude, abre la sección de complementos, elige agregar desde GitHub y escribe:</span><br><code>nicoparetti/editor-comunicadores</code></li>
+      <li><strong>Instala «Editor de video · para comunicadores».</strong><br><span style="color:var(--suave)">Aparece en la lista. Tócalo e instálalo.</span></li>
+      <li><strong>Empieza.</strong><br><span style="color:var(--suave)">Abre un chat nuevo y escribe</span> <code>/empezar</code><span style="color:var(--suave)">. La herramienta te prepara las carpetas y te guía desde ahí.</span></li>
+    </ol>
+    <p class="nota" style="margin-top:26px">¿Algo no funciona? Escríbeme por Instagram a <a href="https://instagram.com/nicoyestefi" target="_blank" rel="noopener">@nicoyestefi</a>.</p>
+    <p style="margin-top:20px"><a class="boton secundario" id="btn-repo" target="_blank" rel="noopener">Ver la herramienta en GitHub</a></p>
+  </section>
+
+</div>
+
+<footer><div class="envoltura">Creado por Nicolás Paretti · Compártela con alguien que tenga un mensaje 🙌</div></footer>
+
+<script src="origen.js"></script>
+<script>
+var C = window.CONFIG, o = window.ORIGEN;
+if (C.videoInstalacion) {
+  document.getElementById("video").innerHTML =
+    '<iframe src="https://www.youtube-nocookie.com/embed/' + C.videoInstalacion +
+    '?rel=0" title="Cómo instalar la herramienta" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+}
+document.getElementById("btn-yt").href = "https://www.youtube.com/@" + C.youtube + "?sub_confirmation=1";
+document.getElementById("btn-ig").href = "https://instagram.com/" + C.instagram;
+document.getElementById("btn-repo").href = C.repo;
+// Instagram -> pedir YouTube primero. YouTube -> pedir Instagram primero. Directo -> ambos.
+var yt = document.getElementById("pedido-yt"), ig = document.getElementById("pedido-ig");
+if (o === "ig") { yt.style.display = "flex"; }
+else if (o === "yt") { ig.style.display = "flex"; }
+else { yt.style.display = "flex"; ig.style.display = "flex"; }
+</script>
+</body>
+</html>
