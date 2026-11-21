@@ -1,6 +1,6 @@
-# Editor de video · para comunicadores
+# Editor para gente común
 
-Un editor de video e imagen que trabaja dentro de Claude, pensado para comunicadores que enseñan. No aplica efectos por aplicar: decide con criterio dónde va cada corte, zoom, gráfico, sonido y subtítulo. Los criterios vienen probados reel por reel y son tu punto de partida: los cambias conversando.
+Un editor de video e imagen que trabaja dentro de Claude, pensado para gente común con un mensaje: líderes, comunicadores y creadores que enseñan. No aplica efectos por aplicar: decide con criterio dónde va cada corte, zoom, gráfico, sonido y subtítulo. Los criterios vienen probados reel por reel y son tu punto de partida: los cambias conversando.
 
 Creado por Nicolás Paretti. Es gratis.
 

@@ -5,7 +5,7 @@
     {
       "name": "editor-comunicadores",
       "source": "./plugins/editor-comunicadores",
-      "description": "Editor de video para comunicadores: reels a cámara, reels con gráficos, clips de prédicas y reels animados, editados con criterio."
+      "description": "Editor para gente común: reels a cámara, reels con gráficos, clips de prédicas y reels animados, editados con criterio."
     }
   ]
 }
