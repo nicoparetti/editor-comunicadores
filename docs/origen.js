@@ -2,7 +2,7 @@
 // También guarda la configuración del sitio.
 window.CONFIG = {
   // Pega aquí la dirección del script de Google (termina en /exec). Ver docs/LEEME-formulario.md
-  urlFormulario: "",
+  urlFormulario: "https://script.google.com/macros/s/AKfycbw9nO9B7FUEtaDa8lLuLlUMNf1fK22gUh6EXsATKY1roh_lj4q6iCziIdz6B_jPEaK1gQ/exec",
   // ID del video de YouTube de instalación (lo que va después de watch?v=). Vacío = muestra "en preparación".
   videoInstalacion: "",
   instagram: "nicoyestefi",

@@ -6,5 +6,5 @@
 4. **Implementar → Nueva implementación** → tipo **Aplicación web**.
    - Ejecutar como: **Yo**
    - Quién tiene acceso: **Cualquier usuario**
-5. Autoriza los permisos (Google te avisa que la app no está verificada: es tu propio script).
+5. Autoriza los permisos (Google te avisa que la app no está verificada: es tu propio script). El script solo pide acceso a esta hoja.
 6. Copia la **URL de la aplicación web** (termina en `/exec`) y pégala en `docs/origen.js`, en `urlFormulario`.
