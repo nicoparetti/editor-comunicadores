@@ -229,3 +229,8 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
 .regalo p{color:var(--gris)}
 .regalo .firma{font-family:Cal,sans-serif;font-style:italic;font-synthesis:style;font-size:24px;color:var(--tinta);margin-top:8px}
 @media (max-width:900px){.adapta{flex-direction:column;align-items:flex-start;padding:30px 24px}.adapta svg{order:-1;width:70px;height:70px}.regalo{flex-direction:column;padding:26px 22px}}
+@media (min-width:901px){
+  .hero{grid-template-columns:1.25fr .75fr}
+  .hero h1{font-size:clamp(48px,4.6vw,66px)}
+  .hero h1 .serif{white-space:nowrap}
+}
