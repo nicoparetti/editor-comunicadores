@@ -182,3 +182,32 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
   .tel{grid-template-columns:130px 1fr}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* v3 */
+.hero h1{font-size:clamp(46px,6.2vw,84px)}
+.hero h1 .serif{font-size:.92em;line-height:1;margin-top:6px}
+.sin-codigo{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center;margin:40px 0 0;padding:70px;background:var(--papel);border:1px solid var(--linea);border-radius:40px}
+.sc-yo{font-family:Ser,serif;font-style:italic;font-size:30px;color:var(--naranja);margin-bottom:6px}
+.sin-codigo h2{margin-bottom:18px}
+.sin-codigo p.gris{font-size:20px;max-width:520px}
+.sc-req{list-style:none}
+.sc-req li{display:flex;flex-direction:column;padding:18px 0;border-bottom:1px solid var(--linea)}
+.sc-req li:first-child{border-top:1.5px solid var(--tinta)}
+.sc-req b{font-family:Cal;font-weight:400;font-size:24px;letter-spacing:-.02em}
+.sc-req span{color:var(--gris);font-size:16px}
+.aviso{font-size:21px;margin-top:18px;max-width:680px;color:var(--gris)}
+.aviso b{color:var(--tinta);font-weight:600}
+.incluye{display:inline-block;background:var(--amarillo);font-size:14px;font-weight:600;padding:5px 14px;border-radius:999px;margin-bottom:18px}
+.cierre{padding:40px 0 110px;text-align:center}
+.cta-final{position:relative;overflow:hidden;background:var(--tinta);color:var(--crema);border-radius:44px;padding:110px 40px}
+.cta-final::before{content:"";position:absolute;left:50%;top:50%;width:900px;height:900px;margin:-450px 0 0 -450px;background:radial-gradient(circle,rgba(224,123,42,.45),rgba(224,123,42,.12) 35%,rgba(224,123,42,0) 65%);pointer-events:none}
+.cta-final>*{position:relative}
+.cta-final h2{font-size:clamp(44px,6vw,80px);margin-bottom:22px}
+.cta-final p{color:#BDB7AC;font-size:20px;max-width:520px;margin:0 auto 40px}
+.boton.grande{font-size:22px;padding:26px 50px;box-shadow:0 18px 50px -10px rgba(224,123,42,.7)}
+.tipo.estrella{position:relative;overflow:hidden}
+@media (max-width:900px){
+  .sin-codigo{grid-template-columns:1fr;padding:40px 24px;gap:24px;border-radius:30px}
+  .cta-final{padding:70px 22px;border-radius:30px}
+  .boton.grande{font-size:19px;padding:22px 30px}
+}
