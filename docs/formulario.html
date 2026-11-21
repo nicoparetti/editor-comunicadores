@@ -71,9 +71,11 @@ document.getElementById("form").addEventListener("submit", function (ev) {
 
   var btn = document.getElementById("enviar");
   btn.disabled = true; btn.textContent = "Enviando…";
+  // El apóstrofo inicial hace que la Hoja lo guarde como texto (no como fórmula).
+  var txt = function (v) { return "'" + v; };
   var datos = new URLSearchParams({
-    nombre: nombre, email: email,
-    telefono: (pais[1] === "+" ? "" : pais[1] + " ") + numero,
+    nombre: txt(nombre), email: txt(email),
+    telefono: txt((pais[1] === "+" ? "" : pais[1] + " ") + numero),
     pais: pais[0], origen: window.ORIGEN
   });
   var destino = "instalar.html?origen=" + encodeURIComponent(window.ORIGEN);
