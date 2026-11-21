@@ -16,7 +16,7 @@ h1,h2,h3{font-family:Cal,Inter,sans-serif;font-weight:400;letter-spacing:-.025em
 h1{font-size:clamp(48px,7.2vw,96px)}
 h2{font-size:clamp(36px,5vw,64px)}
 h3{font-size:30px;letter-spacing:-.02em}
-.serif{font-family:Ser,serif;font-style:italic;letter-spacing:-.01em}
+.serif{font-family:Cal,sans-serif;font-style:italic;font-synthesis:style;letter-spacing:-.025em}
 .etiqueta{display:block;font-size:15px;color:var(--gris);margin-bottom:12px}
 .gris{color:var(--gris)}
 
@@ -49,7 +49,7 @@ header.arriba{padding:24px 0;display:flex;justify-content:space-between;align-it
 
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:40px 0 110px}
 .hero p.bajada{font-size:22px;color:var(--gris);max-width:520px;margin:26px 0 36px}
-.hero h1 .serif{display:block;color:var(--naranja);font-size:1.08em;line-height:.95}
+.hero h1 .serif{display:block;color:var(--naranja)}
 .escena-hero{position:relative;height:640px;display:flex;justify-content:center;align-items:center}
 .escena-hero::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(224,123,42,.35),rgba(224,123,42,0) 68%)}
 .escena-hero .celu{width:310px}
@@ -71,7 +71,7 @@ header.arriba{padding:24px 0;display:flex;justify-content:space-between;align-it
 .tipo.par .visual .burbuja{left:auto;right:0}
 .tipo .num{font-family:Cal;font-size:18px;color:var(--naranja);margin-bottom:14px;display:block}
 .tipo h3{font-size:clamp(36px,4vw,52px);margin-bottom:16px}
-.tipo .pedido{font-family:Ser,serif;font-style:italic;font-size:26px;line-height:1.25;margin-bottom:28px}
+.tipo .pedido{font-family:Cal,sans-serif;font-style:italic;font-synthesis:style;font-size:23px;letter-spacing:-.01em;line-height:1.25;margin-bottom:28px}
 .hace{list-style:none;border-top:1.5px solid var(--tinta)}
 .hace li{padding:14px 0 14px 30px;border-bottom:1px solid var(--linea);position:relative;font-size:17.5px}
 .hace li::before{content:"";position:absolute;left:4px;top:23px;width:10px;height:10px;border-radius:50%;background:var(--naranja)}
@@ -102,7 +102,7 @@ header.arriba{padding:24px 0;display:flex;justify-content:space-between;align-it
 .mini::after{content:"";position:absolute;inset:0;background:rgba(27,31,36,.55);backdrop-filter:blur(3px)}
 .mini .zona{position:absolute;z-index:2;left:8%;right:8%;top:63%;height:16%;border:1.5px dashed var(--amarillo);border-radius:8px}
 .mini .sub{position:absolute;z-index:2;left:0;right:0;top:65.5%;text-align:center;color:#fff;font-family:Cal;font-size:16px;line-height:1.15}
-.mini .sub em{font-family:Ser,serif;color:var(--amarillo)}
+.mini .sub em{font-style:italic;color:var(--amarillo)}
 
 .hub{padding:40px 0 120px;display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center}
 .hub p.gris{font-size:20px;margin-top:20px;max-width:420px}
@@ -185,9 +185,9 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
 
 /* v3 */
 .hero h1{font-size:clamp(46px,6.2vw,84px)}
-.hero h1 .serif{font-size:.92em;line-height:1;margin-top:6px}
+.hero h1 .serif{font-size:1em;line-height:1;margin-top:4px}
 .sin-codigo{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center;margin:40px 0 0;padding:70px;background:var(--papel);border:1px solid var(--linea);border-radius:40px}
-.sc-yo{font-family:Ser,serif;font-style:italic;font-size:30px;color:var(--naranja);margin-bottom:6px}
+.sc-yo{font-family:Cal,sans-serif;font-style:italic;font-synthesis:style;font-size:28px;letter-spacing:-.02em;color:var(--naranja);margin-bottom:6px}
 .sin-codigo h2{margin-bottom:18px}
 .sin-codigo p.gris{font-size:20px;max-width:520px}
 .sc-req{list-style:none}
@@ -227,5 +227,5 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
 .regalo img{width:80px;height:80px}
 .regalo h3{font-size:28px;margin-bottom:8px}
 .regalo p{color:var(--gris)}
-.regalo .firma{font-family:Ser,serif;font-style:italic;font-size:26px;color:var(--tinta);margin-top:8px}
+.regalo .firma{font-family:Cal,sans-serif;font-style:italic;font-synthesis:style;font-size:24px;color:var(--tinta);margin-top:8px}
 @media (max-width:900px){.adapta{flex-direction:column;align-items:flex-start;padding:30px 24px}.adapta svg{order:-1;width:70px;height:70px}.regalo{flex-direction:column;padding:26px 22px}}
