@@ -1,0 +1,3 @@
+# Pega un link por línea (YouTube, Instagram, TikTok). Opcional: un nombre para la carpeta después del link.
+# Ejemplo:
+# https://www.instagram.com/reel/XXXXXXXX/  reel-ejemplo

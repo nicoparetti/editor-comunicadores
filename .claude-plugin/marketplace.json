@@ -1,0 +1,11 @@
+{
+  "name": "editor-comunicadores",
+  "owner": { "name": "Nicolás Paretti" },
+  "plugins": [
+    {
+      "name": "editor-comunicadores",
+      "source": "./plugins/editor-comunicadores",
+      "description": "Editor de video para comunicadores: reels a cámara, reels con gráficos, clips de prédicas y reels animados, editados con criterio."
+    }
+  ]
+}

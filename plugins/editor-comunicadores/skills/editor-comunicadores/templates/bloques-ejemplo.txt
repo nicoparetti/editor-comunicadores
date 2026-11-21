@@ -1,0 +1,10 @@
+# Un bloque por línea, tal como se ve en pantalla (literal, con voseo).
+#   "/"        salto de renglón (solo si no entra en un renglón de ~860 px)
+#   *palabra*  tipografía complementaria (PlayfairDisplay-SemiBoldItalic crema), pocas por video
+#   H:         highlight acumulativo (1–3 por video, en remates)
+Este libro
+es el que
+estoy leyendo ahora
+hasta las *lágrimas*
+H:porque *largo* no es/sinónimo de *profundo*
+H:buscalos a *propósito*/empezalos y *terminalos*
