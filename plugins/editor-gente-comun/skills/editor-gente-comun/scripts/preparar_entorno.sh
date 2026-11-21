@@ -50,7 +50,7 @@ case "${1:-estado}" in
       && mv chromium ../bin/chromium && chmod +x ../bin/chromium && tar -xf swiftshader.tar -C ../bin && cd .. && rm -rf x pack.tar
     "$CHROMIUM_BIN" --version && ok "Chromium" ;;
   motor)
-    SK=$(ls -d "$HOME"/.claude/plugins/*/*/skills/editor-comunicadores 2>/dev/null | head -1)
+    SK=$(ls -d "$HOME"/.claude/plugins/*/*/skills/editor-gente-comun 2>/dev/null | head -1)
     [ -f "$H/motor/package.json" ] || { [ -n "$SK" ] && cp -R "$SK/templates/motor/." "$H/motor/"; }
     [ -f "$H/motor/package.json" ] || { echo "Falta el proyecto del motor: copiar templates/motor de la skill a .herramientas/motor"; exit 1; }
     mkdir -p "$H/motor/public/fuentes" "$H/motor/public/mock" && cp "$R"/4_Recursos/fuentes/*.ttf "$H/motor/public/fuentes/" 2>/dev/null

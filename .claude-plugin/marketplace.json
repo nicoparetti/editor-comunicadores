@@ -1,10 +1,12 @@
 {
-  "name": "editor-comunicadores",
-  "owner": { "name": "Nicolás Paretti" },
+  "name": "editor-gente-comun",
+  "owner": {
+    "name": "Nicolás Paretti"
+  },
   "plugins": [
     {
-      "name": "editor-comunicadores",
-      "source": "./plugins/editor-comunicadores",
+      "name": "editor-gente-comun",
+      "source": "./plugins/editor-gente-comun",
       "description": "Editor para gente común: reels a cámara, reels con gráficos, clips de prédicas y reels animados, editados con criterio."
     }
   ]

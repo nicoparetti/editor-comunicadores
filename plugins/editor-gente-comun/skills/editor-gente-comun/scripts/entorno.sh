@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Entorno de herramientas de editor-comunicadores. Uso, desde la raíz de la carpeta de trabajo:
+# Entorno de herramientas de editor-gente-comun. Uso, desde la raíz de la carpeta de trabajo:
 #   source .herramientas/scripts/entorno.sh
 # Cada llamada de shell es nueva: hay que cargarlo en cada comando que use las herramientas.
 _EN_SCRIPTS="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
@@ -23,7 +23,7 @@ if [ ! -f "$_FC" ] || ! grep -q "$EDITOR_FUENTES" "$_FC" 2>/dev/null; then
 <fontconfig>
   <dir>$EDITOR_FUENTES</dir>
   <include ignore_missing="yes">/etc/fonts/fonts.conf</include>
-  <cachedir>/tmp/fontconfig-editor-comunicadores</cachedir>
+  <cachedir>/tmp/fontconfig-editor-gente-comun</cachedir>
 </fontconfig>
 EOF
 fi

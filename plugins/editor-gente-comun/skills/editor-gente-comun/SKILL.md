@@ -1,5 +1,5 @@
 ---
-name: editor-comunicadores
+name: editor-gente-comun
 description: Editor para gente común. Editor de video e imagen para líderes, comunicadores y creadores que enseñan. Usar siempre que la persona pida editar un reel o video, poner o corregir subtítulos, sacar clips de una prédica, clase o video largo, montar un reel animado con su voz, crear gráficos animados, limpiar la voz, poner efectos de sonido, armar la entrega para CapCut, analizar un video de referencia, hacer portadas o carruseles, organizar su hub de contenido, cambiar su estilo (colores, fuentes, sonidos), o cuando diga "hola", "configura mi editor" o "qué sabes hacer", aunque no nombre el complemento.
 ---
 

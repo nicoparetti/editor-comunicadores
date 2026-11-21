@@ -1,6 +1,6 @@
 // Recibe los datos del formulario de la página y los guarda en esta Hoja de Google.
 // También envía un correo de bienvenida con el enlace de instalación.
-var URL_INSTALAR = "https://nicoparetti.github.io/editor-comunicadores/instalar.html";
+var URL_INSTALAR = "https://nicoparetti.github.io/editor-gente-comun/instalar.html";
 
 function doPost(e) {
   var p = e.parameter;

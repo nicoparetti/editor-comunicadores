@@ -7,7 +7,7 @@ window.CONFIG = {
   videoInstalacion: "",
   instagram: "nicoyestefi",
   youtube: "nicoyestefi",
-  repo: "https://github.com/nicoparetti/editor-comunicadores"
+  repo: "https://github.com/nicoparetti/editor-gente-comun"
 };
 
 (function () {
