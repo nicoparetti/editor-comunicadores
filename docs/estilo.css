@@ -211,3 +211,7 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
   .cta-final{padding:70px 22px;border-radius:30px}
   .boton.grande{font-size:19px;padding:22px 30px}
 }
+.sc-titulo{font-size:26px;margin-bottom:14px}
+.tipo.estrella .visual::before{width:560px;height:560px;background:radial-gradient(circle,rgba(246,246,168,.42),rgba(246,246,168,.14) 40%,rgba(246,246,168,0) 70%)}
+.tipo.estrella .celu{box-shadow:0 0 0 1.5px #3b414a,0 0 0 6px rgba(246,246,168,.08),0 0 90px rgba(246,246,168,.25),0 40px 80px -20px rgba(0,0,0,.6)}
+@media (max-width:900px){.tipo.estrella .visual::before{width:400px;height:400px}}
