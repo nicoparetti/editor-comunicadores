@@ -234,3 +234,54 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
   .hero h1{font-size:clamp(48px,4.6vw,66px)}
   .hero h1 .serif{white-space:nowrap}
 }
+/* v6: ajustes de celular */
+.hace li:last-child{border-bottom:0}
+@media (max-width:900px){
+  body{font-size:16.5px}
+  .hero p.bajada{font-size:19px;margin:20px 0 28px}
+  .tipos-cabeza p,.aviso{font-size:18px}
+  .hace li{font-size:16.5px;padding:12px 0 12px 26px}
+  .hace li::before{top:20px;width:8px;height:8px}
+  .tipo .pedido{font-size:19px;margin-bottom:20px}
+  .hub p.gris,.sin-codigo p.gris{font-size:18px}
+  .sc-req span{font-size:15.5px}
+  .adapta p{font-size:17px}
+  .adapta h3{font-size:24px}
+  .cta-final p{font-size:18px}
+  .burbuja{font-size:15px;max-width:240px}
+  .nota{font-size:14px}
+  /* criterios: rectángulos horizontales y compactos */
+  .criterios{padding:80px 0}
+  .criterios-grilla{gap:14px;margin-top:32px}
+  .pieza{flex-direction:row;align-items:center;gap:18px;min-height:0;padding:18px 20px;border-radius:22px}
+  .pieza .muestra{flex:0 0 96px;height:96px;margin:0}
+  .pieza h3{font-size:20px;margin-bottom:2px}
+  .pieza p{font-size:15px;line-height:1.4}
+  .aa{gap:6px}.aa span{font-size:30px}
+  .onda{height:56px;gap:2px}.onda i{width:3px}
+  .onda i:nth-child(n+13){display:none}
+  .cifra{font-size:22px;margin-left:6px}
+  .pieza:nth-child(2) .muestra{flex-direction:column}
+  .pieza:nth-child(2) .cifra{margin:4px 0 0}
+  .mini{width:56px;border-radius:12px}
+  .mini .sub{font-size:6.5px;top:66%}
+  .mini .zona{border-width:1px;border-radius:4px}
+  /* formulario más compacto */
+  .caja{margin:10px auto 50px;padding:24px 20px;border-radius:24px}
+  .caja h2{font-size:30px;margin-bottom:6px}
+  .presenta{padding:12px;gap:12px;margin-bottom:18px}
+  .presenta img{width:48px;height:48px}
+  .presenta p{font-size:14px}
+  label{margin:16px 0 6px;font-size:14.5px}
+  input[type=text],input[type=email],input[type=tel],select{padding:13px 14px;font-size:16px}
+  label.check{margin-top:16px;font-size:13.5px}
+  .caja .boton{margin-top:20px}
+}
+.pieza-txt{min-width:0}
+@media (max-width:900px){
+  .pieza{overflow:hidden}
+  .aa{gap:3px}.aa span{font-size:24px}
+  .pieza .muestra{flex:0 0 84px;height:84px}
+}
+@media (max-width:900px){.adapta{gap:14px;padding:26px 22px}.adapta svg{width:54px;height:54px}}
+@media (max-width:900px){.onda i{max-height:52px}.pieza:nth-child(2) .muestra{justify-content:center;gap:4px}}
