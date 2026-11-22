@@ -465,3 +465,14 @@ footer .pie p+p{margin-top:2px}
 .tipo.estrella .visual .burbuja.ia{background:var(--tinta);box-shadow:0 0 0 1.5px rgba(224,123,42,.55),0 0 36px 4px rgba(224,123,42,.45),0 22px 44px -16px rgba(0,0,0,.6)}
 .tipo.estrella .visual .burbuja.ia{box-shadow:0 0 0 1.5px rgba(246,246,168,.6),0 0 36px 4px rgba(246,246,168,.35),0 22px 44px -16px rgba(0,0,0,.6)}
 .tipo.estrella .visual .burbuja.ia small{color:var(--amarillo)}
+
+/* v12: cierre en dos renglones y cerebro al lado del título en celular */
+.cta-final .una-linea{white-space:nowrap}
+@media (max-width:600px){
+  .cta-final h2{font-size:min(44px,7.9vw)}
+  .adapta{display:grid;grid-template-columns:auto 1fr;column-gap:14px;row-gap:10px;align-items:center}
+  .adapta>div{display:contents}
+  .adapta svg{grid-column:1;grid-row:1;order:0;width:46px;height:46px}
+  .adapta h3{grid-column:2;grid-row:1;margin:0;font-size:21px}
+  .adapta p{grid-column:1/-1;grid-row:2}
+}
