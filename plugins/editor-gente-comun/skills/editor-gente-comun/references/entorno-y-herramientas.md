@@ -3,7 +3,7 @@
 ## Dónde se trabaja
 
 - **Carpeta de trabajo:** `~/Desktop/Editor de Videos IA/` en la computadora de la persona. Si no está conectada a la sesión, pide acceso a esa carpeta.
-- **Shell en la computadora de la persona** (`device_bash`): Linux arm64 dentro de la Mac, con la carpeta en `$HOME/mnt/Editor de Videos IA`. Todo lo que toca videos se hace ahí: los brutos 4K pesan demasiado para moverlos.
+- **Shell en la computadora de la persona** (`device_bash`): Linux dentro de su computadora (arm64 en Mac con chip Apple, x64 en Windows o Mac Intel), con la carpeta en `$HOME/mnt/Editor de Videos IA`. Todo lo que toca videos se hace ahí: los brutos 4K pesan demasiado para moverlos.
   - Cada llamada es un shell nuevo de **≤180 s**: los procesos en segundo plano mueren al terminar la llamada. Divide los trabajos largos en pasos; los scripts largos son reanudables (dicen `SIGUE`).
   - `/tmp` dura toda la sesión; el resto de la máquina (fuera de la carpeta) se borra entre sesiones. Por eso todas las herramientas viven en `.herramientas/` dentro de la carpeta.
   - Empieza cada comando con: `cd "$HOME/mnt/Editor de Videos IA" && source .herramientas/scripts/entorno.sh`.
@@ -14,7 +14,7 @@
 ## Al empezar una sesión
 
 1. `bash .herramientas/scripts/preparar_entorno.sh` → lista qué está listo y qué falta. Instala lo que falte con `preparar_entorno.sh <paso>` (un paso por llamada).
-2. Compara `.herramientas/scripts/VERSION` con `scripts/VERSION` de esta skill. Si la skill es más nueva, copia los scripts de la skill a `.herramientas/scripts/`: cópialos a `/mnt/user-data/outputs/` en el espacio de la nube y escríbelos en la carpeta con `device_commit_files`. Usa un nombre de archivo nuevo cada vez que vuelvas a enviar un archivo ya enviado (la copia puede salir de una caché vieja) y verifica con `md5sum` en los dos lados.
+2. Compara `.herramientas/scripts/VERSION` con `scripts/VERSION` de esta skill. Si la skill es más nueva, actualiza las herramientas con el mismo comando de la bienvenida (`bienvenida.md`, paso 3.3): baja el repositorio de GitHub y corre `instalar_carpeta.sh`, que reemplaza `.herramientas/scripts` y `.herramientas/plantillas` sin tocar sus videos, su perfil ni sus recursos.
 
 ## Borrado de intermedios
 
@@ -25,9 +25,10 @@
 El acceso a internet sigue la lista de dominios permitidos de la cuenta.
 - Funcionan: GitHub (y sus descargas), npm, PyPI, raw.githubusercontent.com.
 - **Bloqueados:** huggingface.co (modelos de Whisper), storage.googleapis.com (Chrome oficial de Remotion), YouTube e Instagram. En el plan de la persona la lista de dominios es fija, así que no se pueden agregar.
-- **Solución para lo bloqueado: la propia conexión de la Mac.** Los archivos `.command` de la raíz de la carpeta corren en macOS (no en la máquina Linux), con la internet de la persona, y él los abre con doble clic. No puedes ejecutarlos tú: pídele que haga doble clic y espera a que te avise.
-  - `Instalar modelo Whisper.command` → baja el modelo a `.herramientas/whisper/` (reanudable).
-  - `Descargar referencias.command` → baja los links de `2_Referencias/links.txt` con `yt-dlp_macos` + `ffmpeg` de macOS (`.herramientas/mac/`); si un link pide sesión (Instagram), reintenta con las cookies de Chrome.
+- **Solución para lo bloqueado: la propia conexión de su computadora.** Los archivos de doble clic corren fuera de la máquina Linux, con la internet de la persona: en Mac los `.command`, en Windows los `.bat`. No puedes ejecutarlos tú: pídele que haga doble clic y espera a que te avise.
+  - `0_Instalar/Descargar transcriptor` (página que abre la descarga en su navegador) → la persona arrastra el archivo a `0_Instalar/` y corres `preparar_entorno.sh modelo`. Plan B: `0_Instalar/Instalar transcriptor` (`.command` o `(Windows).bat`), que lo baja directo a `.herramientas/whisper/` (reanudable).
+  - `2_Referencias/Descargar referencias` (`.command` o `(Windows).bat`) → baja los links de `2_Referencias/links.txt` con yt-dlp + ffmpeg de su sistema (`.herramientas/mac/` o `.herramientas/win/`); si un link pide sesión (Instagram), reintenta con las cookies de Chrome.
+- **En Windows** la máquina Linux es x64 (en Mac con chip Apple, arm64): `preparar_entorno.sh` elige solo la versión de Chromium. Los `.command` no abren en Windows: sus equivalentes son los `.bat` de `0_Instalar/` y `2_Referencias/`, que usan `yt-dlp.exe` y `ffmpeg.exe` de `.herramientas/win/` (paso `win`). Si Windows muestra "Windows protegió tu PC", la persona toca Más información → Ejecutar de todas formas.
 - Paquetes npm que descargan binarios con su propio cliente fallan con 407: instala con `--ignore-scripts`.
 
 ## Herramientas instaladas (en la carpeta)
@@ -47,7 +48,7 @@ El acceso a internet sigue la lista de dominios permitidos de la cuenta.
 ## Transcripción
 
 - `python3 .herramientas/scripts/transcribir.py <video> 3_Videos editados/<nombre>/trabajo/transcripcion` → `palabras.json` + `TRANSCRIPT.md`. Tramos de ~30 s cortados en silencios, **uno por llamada** (cada tramo tarda ~2 min: 1 min de video ≈ 4 min de transcripción); mientras diga `SIGUE`, se repite el comando. Usa `-nfa`: con flash attention, whisper.cpp no calcula las marcas DTW. Probado con el reel de referencia a cámara: 98,6 % de palabras iguales al ASR de CapCut y diferencia mediana de inicio 0,05 s; los nombres propios igual hay que corregirlos ("Blaes" → Blaise, "Compartil" → Compartí).
-- Modelo: `.herramientas/whisper/ggml-large-v3-turbo.bin` (~1,6 GB). Si falta, pídele a la persona doble clic en `Instalar modelo Whisper.command`. Mientras falte, usa el ASR de CapCut como fuente (como en el reel de referencia a cámara) y avisa que no está verificado con Whisper.
+- Modelo: `.herramientas/whisper/ggml-large-v3-turbo.bin` (~1,6 GB). Si falta, pídele a la persona doble clic en `0_Instalar/Descargar transcriptor` (plan B: `Instalar transcriptor`). Mientras falte, usa el ASR de CapCut como fuente (como en el reel de referencia a cámara) y avisa que no está verificado con Whisper.
 - Usa las marcas **DTW** (los tiempos normales se desvían en silencios largos). Inicio de palabra ≈ DTW − 0,08 s (el script ya lo aplica).
 - Después: corrige términos propios, nombres, términos bíblicos, griego/hebreo y anglicismos (`estilo-por-defecto.md` → Términos propios). Un error de transcripción es un error gráfico.
 

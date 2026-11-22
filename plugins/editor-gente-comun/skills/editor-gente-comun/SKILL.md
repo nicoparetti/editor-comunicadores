@@ -42,22 +42,21 @@ Cuando dos capas choquen, gana la de mayor prioridad y anótalo en la hoja de ed
 
 ## Carpeta de trabajo
 
-`~/Desktop/Editor de Videos IA/` en la computadora de la persona. Llega armada dentro del paquete que descomprimió y movió al Escritorio. Si no está conectada a la conversación, pide acceso a esa carpeta; si no la encuentras, pregúntale dónde la dejó.
+`Editor de Videos IA/` en el Escritorio de la computadora de la persona (Mac o Windows). **No viene con el complemento: la armas tú en la bienvenida** (`references/bienvenida.md`, paso 3) bajándola del repositorio de GitHub con `scripts/instalar_carpeta.sh`. Si ya existe pero no está conectada a la conversación, pide acceso a esa carpeta; si no la encuentras, pregúntale dónde la dejó.
 
 ```
-EMPIEZA AQUÍ · Instalación.pdf + Qué esperar de tu editor.pdf   las dos guías (no las modifiques)
-0_Instalar/            el complemento .zip + "Descargar transcriptor" + "Instalar transcriptor.command"
+0_Instalar/            "Descargar transcriptor" (página que abre la descarga) + "Instalar transcriptor" (.command para Mac, .bat para Windows)
 1_Videos sin editar/   videos y audios originales (NUNCA se modifican; se trabaja sobre copias)
-2_Referencias/         videos de otros creadores, uno por carpeta + links.txt + "Descargar referencias.command"
+2_Referencias/         videos de otros creadores, uno por carpeta + links.txt + "Descargar referencias" (.command Mac, .bat Windows)
 3_Videos editados/<n>/ el video final + su portada + ESTADO.md y HOJA.md; trabajo/ (temporal)
 4_Recursos/            BANCO_SFX.md, fuentes/, sfx/, musica/, luts/, logo/, imagenes/
 5_Mi estilo/           mi-perfil.md (su perfil) + tableros/ (las propuestas que eligió) + fichas de referencias
-.herramientas/         oculta: transcriptor, motor de animación, recortador, navegador para renders
+.herramientas/         oculta: scripts/, plantillas/ (copias de la skill), transcriptor, motor de animación, recortador, navegador para renders
 ```
 
 Cada carpeta numerada trae un `LEEME.txt` de una línea para la persona: no lo borres.
 
-Los videos se procesan **en la computadora de la persona** (shell `device_bash`), nunca subiéndolos a la nube. Al empezar cada sesión: `cd "$HOME/mnt/Editor de Videos IA" && bash .herramientas/scripts/preparar_entorno.sh`, y en cada comando `source .herramientas/scripts/entorno.sh`. Si faltan programas, instálalos con ese mismo script, un paso por llamada, contándole en una línea qué estás instalando y para qué. Lo que la red de este entorno bloquea (modelos grandes, YouTube, Instagram) se baja con la conexión de su computadora mediante los archivos de `0_Instalar/` y `2_Referencias/`, que abre con doble clic. Detalle técnico: `references/entorno-y-herramientas.md`.
+Los videos se procesan **en la computadora de la persona** (shell `device_bash`), nunca subiéndolos a la nube. Al empezar cada sesión: `cd "$HOME/mnt/Editor de Videos IA" && bash .herramientas/scripts/preparar_entorno.sh`, y en cada comando `source .herramientas/scripts/entorno.sh`. Si faltan programas, instálalos con ese mismo script, un paso por llamada, contándole en una línea qué estás instalando y para qué. Lo que la red de este entorno bloquea (modelos grandes, YouTube, Instagram) se baja con la conexión de su computadora mediante los archivos de `0_Instalar/` y `2_Referencias/`, que abre con doble clic: en Mac los `.command`, en Windows los `.bat`. Si hay una versión nueva del complemento, actualiza las herramientas volviendo a correr `instalar_carpeta.sh` (no toca sus videos, su perfil ni sus recursos). Detalle técnico: `references/entorno-y-herramientas.md`.
 
 **Qué se guarda:** en `3_Videos editados/<nombre>/` solo el video editado final y su portada. La versión limpia, el `.srt` y las capas se muestran en el chat (avisándole que no se guardan para no ocupar espacio). **Borrado de intermedios:** lo temporal (`trabajo/`, proxies, pruebas, versiones superadas) se borra al cerrar cada video, sin preguntar. La primera vez explícale que la app le va a pedir permiso para borrar y por qué; después, pídelo al empezar cada sesión con `device_request_delete_permission` sobre la carpeta. **Nunca** borres `1_Videos sin editar/`, videos finales aprobados, `2_Referencias/`, `4_Recursos/`, `5_Mi estilo/` ni nada fuera de la carpeta.
 

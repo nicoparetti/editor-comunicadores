@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-# Revisa e instala las herramientas del editor en la carpeta de trabajo (Linux arm64 dentro de la Mac).
+# Revisa e instala las herramientas del editor en la carpeta de trabajo (Linux dentro de la Mac o de la PC con Windows).
 # Uso, desde la raíz de la carpeta de trabajo:
 #   bash .herramientas/scripts/preparar_entorno.sh            → estado de cada herramienta
 #   bash .herramientas/scripts/preparar_entorno.sh <paso>     → instala un paso (carpetas, venv, chromium,
-#                                                               motor, hyperframes, recorte, whisper, mac, manuales)
+#                                                               motor, hyperframes, recorte, whisper, mac, win, manuales)
 # Cada paso cabe en una llamada de shell (≤170 s). Si uno corta por tiempo, se vuelve a correr y sigue.
 set -uo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/entorno.sh"
 R="$EDITOR_RAIZ"; H="$EDITOR_HERR"
-CHROMIUM_PACK="https://github.com/Sparticuz/chromium/releases/download/v143.0.4/chromium-v143.0.4-pack.arm64.tar"
+case "$(uname -m)" in aarch64|arm64) ARQ=arm64 ;; *) ARQ=x64 ;; esac   # Mac con chip Apple: arm64; PC con Windows: x64
+CHROMIUM_PACK="https://github.com/Sparticuz/chromium/releases/download/v143.0.4/chromium-v143.0.4-pack.$ARQ.tar"
 U2NET="https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net_human_seg.onnx"
 ok(){ printf "  [OK]   %s\n" "$1"; }; falta(){ printf "  [FALTA] %s → %s\n" "$1" "$2"; }
 
@@ -20,14 +21,16 @@ estado() {
   python3 -c "import PIL, numpy" 2>/dev/null && ok "Python ($(command -v python3)) con PIL y numpy" || falta "PIL/numpy" "paso venv"
   [ -x "$H/venv/bin/python" ] && ok "venv (.herramientas/venv)" || falta "venv" "paso venv"
   [ -x "$H/venv/bin/yt-dlp" ] && ok "yt-dlp" || falta "yt-dlp" "paso venv"
-  [ -x "$CHROMIUM_BIN" ] && "$CHROMIUM_BIN" --version >/dev/null 2>&1 && ok "Chromium arm64 ($("$CHROMIUM_BIN" --version 2>/dev/null))" || falta "Chromium" "paso chromium"
+  [ -x "$CHROMIUM_BIN" ] && "$CHROMIUM_BIN" --version >/dev/null 2>&1 && ok "Chromium $ARQ ($("$CHROMIUM_BIN" --version 2>/dev/null))" || falta "Chromium" "paso chromium"
   [ -f "$R/.herramientas/motor/node_modules/remotion/dist/cjs/index.js" ] && ok "Motor Remotion (node_modules)" || falta "Motor Remotion" "paso motor"
   [ -x "$H/hyperframes/node_modules/.bin/hyperframes" ] && ok "HyperFrames CLI" || falta "HyperFrames CLI" "paso hyperframes"
   [ -d "$H/hyperframes/node_modules/onnxruntime-node" ] && [ -f "$H/modelos/u2net_human_seg.onnx" ] && ok "Recorte de persona (u2net)" || falta "Recorte de persona" "paso recorte"
   "$H/venv/bin/python" -c "import cv2, fontTools" 2>/dev/null && [ -f "$H/modelos/face_detection_yunet_2023mar.onnx" ] && ok "OpenCV + YuNet (encuadre vertical de clips)" || falta "OpenCV/YuNet" "paso venv y paso recorte"
   [ -x "$WHISPER_BIN" ] && ok "whisper.cpp" || falta "whisper.cpp" "paso whisper"
   [ -f "$WHISPER_MODEL" ] && ok "Modelo Whisper large-v3-turbo" || { [ -f "$R/0_Instalar/ggml-large-v3-turbo.bin" ] && falta "Modelo Whisper (ya descargado en 0_Instalar)" "paso modelo" || falta "Modelo Whisper" "pedir doble clic en 0_Instalar/Descargar transcriptor y arrastrar el archivo a 0_Instalar"; }
-  [ -x "$H/mac/yt-dlp_macos" ] && [ -x "$H/mac/ffmpeg" ] && [ -f "$R/2_Referencias/Descargar referencias.command" ] && ok "Descarga de referencias (yt-dlp para macOS)" || falta "Descarga de referencias" "paso mac"
+  if [ -x "$H/mac/yt-dlp_macos" ] && [ -x "$H/mac/ffmpeg" ]; then ok "Descarga de referencias (Mac)"
+  elif [ -f "$H/win/yt-dlp.exe" ] && [ -f "$H/win/ffmpeg.exe" ]; then ok "Descarga de referencias (Windows)"
+  else falta "Descarga de referencias" "paso mac (si la persona usa Mac) o paso win (si usa Windows)"; fi
   [ -d "$H/manuales/remotion/skills" ] && ok "Manual oficial de Remotion" || falta "Manual Remotion" "paso manuales"
   [ -d "$H/manuales/hyperframes" ] && ok "Manual de HyperFrames" || falta "Manual HyperFrames" "paso manuales"
   [ -f "$H/scripts/VERSION" ] && echo "  Scripts: versión $(cat "$H/scripts/VERSION")"
@@ -50,9 +53,8 @@ case "${1:-estado}" in
       && mv chromium ../bin/chromium && chmod +x ../bin/chromium && tar -xf swiftshader.tar -C ../bin && cd .. && rm -rf x pack.tar
     "$CHROMIUM_BIN" --version && ok "Chromium" ;;
   motor)
-    SK=$(ls -d "$HOME"/.claude/plugins/*/*/skills/editor-gente-comun 2>/dev/null | head -1)
-    [ -f "$H/motor/package.json" ] || { [ -n "$SK" ] && cp -R "$SK/templates/motor/." "$H/motor/"; }
-    [ -f "$H/motor/package.json" ] || { echo "Falta el proyecto del motor: copiar templates/motor de la skill a .herramientas/motor"; exit 1; }
+    [ -f "$H/motor/package.json" ] || { [ -d "$H/plantillas/motor" ] && cp -R "$H/plantillas/motor/." "$H/motor/"; }
+    [ -f "$H/motor/package.json" ] || { echo "Falta el proyecto del motor: correr instalar_carpeta.sh (bienvenida, paso 3)"; exit 1; }
     mkdir -p "$H/motor/public/fuentes" "$H/motor/public/mock" && cp "$R"/4_Recursos/fuentes/*.ttf "$H/motor/public/fuentes/" 2>/dev/null
     cd "$H/motor" && timeout 170 npm install --ignore-scripts --no-audit --no-fund --loglevel=error && ok "Motor Remotion" ;;
   hyperframes)
@@ -79,5 +81,9 @@ case "${1:-estado}" in
     mkdir -p "$H/mac" && cd "$H/mac" && { [ -x yt-dlp_macos ] || timeout 80 curl -sSfL -o yt-dlp_macos https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos; } \
       && { [ -x ffmpeg ] || timeout 90 curl -sSfL -o ffmpeg https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1/ffmpeg-darwin-arm64; } \
       && chmod +x yt-dlp_macos ffmpeg && ok "yt-dlp y ffmpeg para macOS " ;;
+  win)
+    mkdir -p "$H/win" && cd "$H/win" && { [ -f yt-dlp.exe ] || timeout 80 curl -sSfL -o yt-dlp.exe https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe; } \
+      && { [ -f ffmpeg.exe ] || timeout 120 curl -sSfL -o ffmpeg.exe https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1/ffmpeg-win32-x64; } \
+      && ok "yt-dlp y ffmpeg para Windows" ;;
   *) echo "Paso desconocido: $1"; exit 1 ;;
 esac

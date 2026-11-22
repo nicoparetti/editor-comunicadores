@@ -1,0 +1,1 @@
+Archivos para instalar el transcriptor (el que pasa tu voz a texto). El editor te va a decir cuándo usarlos.

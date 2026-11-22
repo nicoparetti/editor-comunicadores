@@ -1,0 +1,5 @@
+Todas estas fuentes son gratuitas, con licencia SIL Open Font License 1.1 (OFL):
+se pueden usar en videos e imágenes, también con fines comerciales.
+Cal Sans (Cal.com), Playfair Display, Montserrat, Inter, JetBrains Mono, Frank Ruhl Libre,
+GFS Didot, Instrument Serif, Anton y Poppins (Google Fonts).
+Texto de la licencia: https://openfontlicense.org

@@ -17,7 +17,7 @@ Creado por Nicolás Paretti. Es gratis.
 
 ## Cómo empezar
 
-Lee la guía **EMPIEZA AQUÍ · Instalación** y, cuando el complemento esté instalado, escribe `/empezar` en una conversación nueva.
+Sigue los pasos de [editor.nicoyestefi.com](https://editor.nicoyestefi.com) y, cuando el complemento esté instalado, escribe `/empezar` en una conversación nueva: el editor arma tu carpeta de trabajo y te guía. Funciona en Mac y en Windows.
 
 ## Comandos
 

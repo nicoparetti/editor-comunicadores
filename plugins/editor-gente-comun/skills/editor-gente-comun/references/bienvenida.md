@@ -30,15 +30,18 @@ Dos tandas de hasta 4 preguntas. Cada pregunta se entiende sola; la persona siem
 
 Si la persona llegó con un video para editar, haz solo la tanda 1; el resto se pregunta cuando haga falta.
 
-## 3. Preparar la carpeta y las herramientas
+## 3. Armar la carpeta y las herramientas
 
-La carpeta ya viene armada en el paquete (SKILL.md → Carpeta de trabajo). Tú instalas las herramientas.
+La carpeta **no viene con el complemento**: la armas tú ahora. Primero averigua si la computadora es Mac o Windows (`get_device_info`; si no queda claro, pregúntaselo).
 
-1. Pide acceso a `~/Desktop/Editor de Videos IA/`. Si no aparece, pregúntale dónde la dejó y explícale que debe estar en el Escritorio con ese nombre exacto.
-2. Revisa que estén las carpetas numeradas; crea las que falten con `preparar_entorno.sh carpetas` (no toca lo que ya existe).
-3. Corre `preparar_entorno.sh` y luego cada paso que falte, uno por llamada. Antes, dile cuánto tarda (unos 15 minutos en total) y que puede dejarte trabajando. Cuéntale en una línea qué instalas, por ejemplo: *"Instalo el transcriptor: pasa tu voz a texto con el tiempo exacto de cada palabra."* Si la app le pide permiso, dile que es normal y que acepte.
-4. **El modelo del transcriptor** (~1,6 GB) no se puede bajar desde tu red. Pídeselo así, sin la Terminal: *"Abre la carpeta Editor de Videos IA → 0_Instalar y haz doble clic en 'Descargar transcriptor'. Se abre tu navegador y empieza a bajar un archivo grande (unos minutos). Cuando termine, arrástralo desde Descargas a la carpeta 0_Instalar y avísame."* Después corre `preparar_entorno.sh modelo`, que lo verifica y lo mueve a su lugar. Plan B si el navegador falla: doble clic en `Instalar transcriptor.command` (abre una ventana de Terminal; no hay que escribir nada; si la computadora lo bloquea, en Mac: Ajustes del Sistema → Privacidad y seguridad → Abrir igualmente).
-5. Si eligió "Muéstrame opciones", o cuando suba su primer video, sigue `personalizar.md` para elegir paleta y fuentes sobre fotogramas suyos.
+1. **Ubica el Escritorio.** En Mac es `~/Desktop`. En Windows puede ser `~/Desktop` o `~/OneDrive/Desktop` (o `Escritorio`): revísalo con `device_list_dir` sobre la carpeta personal. Si ya existe `Editor de Videos IA` ahí, pide acceso solo a esa carpeta y salta al punto 3.
+2. **Crea la carpeta.** Pide acceso al Escritorio con `device_request_folder_access`, explicando el motivo en una frase: *"Te pido permiso para el Escritorio solo para crear la carpeta Editor de Videos IA, donde van a vivir tus videos. Después trabajo únicamente dentro de ella."* Créala con `mkdir`. Si la persona prefiere no dar ese permiso, pídele que cree ella una carpeta vacía con ese nombre exacto en el Escritorio y pide acceso solo a esa.
+3. **Baja la carpeta base desde GitHub** (una sola llamada de shell; trae sonidos, fuentes gratuitas, archivos de doble clic, scripts y plantillas; no pisa nada que ya exista):
+   `rm -rf /tmp/egc && git clone -q --depth 1 https://github.com/nicoparetti/editor-gente-comun.git /tmp/egc && bash /tmp/egc/plugins/editor-gente-comun/skills/editor-gente-comun/scripts/instalar_carpeta.sh "$HOME/mnt/Editor de Videos IA"`
+   Si `git` falla, baja el mismo repositorio con `curl -sSfL https://github.com/nicoparetti/editor-gente-comun/archive/refs/heads/main.tar.gz | tar -xz -C /tmp` y corre el script desde `/tmp/editor-gente-comun-main/…`.
+4. **Instala las herramientas.** Corre `preparar_entorno.sh` y luego cada paso que falte, uno por llamada. En el paso de descarga de referencias usa `mac` si la persona tiene Mac y `win` si tiene Windows. Antes, dile cuánto tarda (unos 15 minutos en total) y que puede dejarte trabajando. Cuéntale en una línea qué instalas, por ejemplo: *"Instalo el transcriptor: pasa tu voz a texto con el tiempo exacto de cada palabra."* Si la app le pide permiso, dile que es normal y que acepte.
+5. **El modelo del transcriptor** (~1,6 GB) no se puede bajar desde tu red. Pídeselo así, sin la Terminal: *"Abre la carpeta Editor de Videos IA → 0_Instalar y haz doble clic en 'Descargar transcriptor'. Se abre tu navegador y empieza a bajar un archivo grande (unos minutos). Cuando termine, arrástralo desde Descargas a la carpeta 0_Instalar y avísame."* Después corre `preparar_entorno.sh modelo`, que lo verifica y lo mueve a su lugar. Plan B si el navegador falla: en Mac, doble clic en `Instalar transcriptor.command` (si la computadora lo bloquea: Ajustes del Sistema → Privacidad y seguridad → Abrir igualmente); en Windows, doble clic en `Instalar transcriptor (Windows).bat` (si aparece "Windows protegió tu PC": Más información → Ejecutar de todas formas). Se abre una ventana negra; no hay que escribir nada.
+6. Si eligió "Muéstrame opciones", o cuando suba su primer video, sigue `personalizar.md` para elegir paleta y fuentes sobre fotogramas suyos.
 
 ## 4. Guardar el perfil
 

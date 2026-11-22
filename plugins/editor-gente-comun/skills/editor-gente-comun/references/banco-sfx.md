@@ -2,7 +2,7 @@
 
 Este banco viene puntuado de fábrica (★ = no usar, ★★★★★ = favorito), a partir de una escucha de 78 sonidos. La copia que manda es `4_Recursos/BANCO_SFX.md` en la carpeta de trabajo: la persona puede puntuar sonidos nuevos y ahí queda. Los sonidos nuevos **se suman** a los de siempre; no reemplazan nada. Usa primero los de 5★ de cada familia y alterna con los de 4★. Los de 1–2★ no se usan salvo pedido.
 
-Carpetas: `4_Recursos/sfx/` (viene en el paquete: 28 sonidos libres) y `4_Recursos/sfx_pixabay/` (la biblioteca que trae HyperFrames, se copia al instalarlo).
+Carpetas: `4_Recursos/sfx/` (llega con la carpeta que arma la bienvenida: 28 sonidos libres) y `4_Recursos/sfx_pixabay/` (la biblioteca que trae HyperFrames, se copia al instalarlo).
 
 ## Taps y clics — acentuar palabras, ítems, textos
 - ★★★★★ `sfx/tap_texture` · `sfx/click_decision` · `sfx/snapcompact` · `sfx/boton` · `sfx/clic_mouse`
