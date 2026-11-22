@@ -69,7 +69,7 @@ async function enviarABrevo(clave, email, pila, apellido, via) {
     sender: REMITENTE,
     to: [{ email, name: (pila + " " + apellido).trim() }],
     replyTo: REMITENTE,
-    subject: "Ya es tuya: Editor para gente común",
+    subject: "¡Ya es tuyo! Editor con IA",
     htmlContent: correoBienvenida(pila),
     tags: ["bienvenida-editor", via || "sin-origen"]
   });
@@ -78,21 +78,21 @@ async function enviarABrevo(clave, email, pila, apellido, via) {
 function correoBienvenida(pila) {
   const saludo = pila ? "Hola " + escapar(pila) + "," : "Hola,";
   const p = 'style="margin:0 0 16px;font:16px/1.55 Arial,Helvetica,sans-serif;color:#1B1F24"';
+  const enlace = 'style="color:#E07B2A"';
   return '<div style="background:#F2EBDD;padding:32px 16px">' +
     '<div style="max-width:560px;margin:0 auto;background:#FBF7EE;border-radius:14px;padding:32px 28px">' +
-    '<p ' + p + '>' + saludo + '</p>' +
-    '<p ' + p + '>Gracias por dejarme tus datos. Acá tenés los pasos para instalar la herramienta:</p>' +
+    '<p ' + p + '>' + saludo + '<br>Qué bueno estar en contacto. Acá tenés los pasos para instalar la herramienta:</p>' +
     '<p style="margin:0 0 24px"><a href="' + PAGINA_INSTALAR + '" style="display:inline-block;background:#E07B2A;color:#fff;text-decoration:none;font:bold 16px Arial,Helvetica,sans-serif;padding:14px 22px;border-radius:999px">Ver cómo instalarla</a></p>' +
-    '<p ' + p + '>Tres cosas para que arranques bien:</p>' +
+    '<p ' + p + '>Tres cosas para que empieces bien:</p>' +
     '<ol style="margin:0 0 16px;padding-left:22px;font:16px/1.55 Arial,Helvetica,sans-serif;color:#1B1F24">' +
-    '<li>Necesitás Claude Pro y tu compu (Mac o Windows).</li>' +
-    '<li>Cuando la tengas instalada, escribí <b>/empezar</b> y ella te guía.</li>' +
+    '<li style="margin-bottom:8px">Necesitás Claude Pro y tu compu (Mac o Windows).</li>' +
+    '<li style="margin-bottom:8px">Cuando la tengas instalada, escribí <b>/empezar</b> en un chat y ella te guía.</li>' +
     '<li>Si algo no funciona, respondé este correo. Lo leo yo.</li>' +
     '</ol>' +
-    '<p ' + p + '>La hice para que más gente común pueda comunicar lo que Dios le puso en el corazón, con criterio y sin efectos de más. No es para vender, es para comunicar.</p>' +
-    '<p ' + p + '>En el <a href="' + CANAL_YOUTUBE + '" style="color:#E07B2A">canal de YouTube</a> vas a encontrar el tutorial de instalación y nuevo contenido.</p>' +
+    '<p ' + p + '>Esta es una herramienta para gente común. Aquellos que quieren compartir su asignación en redes sociales. No es para vender, es para comunicar. Lográ editar con criterios especialmente creados, elegidos y probados.</p>' +
+    '<p ' + p + '>En el <a href="' + CANAL_YOUTUBE + '" ' + enlace + '>canal de YouTube</a> vas a encontrar el tutorial de instalación y nuevo contenido.</p>' +
     '<p ' + p + '>Abrazo,<br><b>Nico</b></p>' +
-    '<p style="margin:24px 0 0;font:14px/1.5 Arial,Helvetica,sans-serif;color:#5C574E">PD: Si conocés a alguien que necesita esto, reenviale este correo.</p>' +
+    '<p style="margin:24px 0 0;font:14px/1.5 Arial,Helvetica,sans-serif;color:#5C574E">PD: Si conocés a alguien que necesita esto, compartile este enlace: <a href="https://editor.nicoyestefi.com" ' + enlace + '>editor.nicoyestefi.com</a></p>' +
     '</div></div>';
 }
 
