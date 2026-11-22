@@ -28,9 +28,10 @@ done
 chmod +x "$R"/0_Instalar/*.command "$R"/2_Referencias/*.command 2>/dev/null || true
 
 # 2) Herramientas: siempre la última versión
-rm -rf "$H/scripts" "$H/plantillas"
-cp -R "$SK/scripts" "$H/scripts"
-cp -R "$SK/templates" "$H/plantillas"
+# (se sobrescriben archivo por archivo: borrar dentro de la carpeta necesita un permiso aparte)
+mkdir -p "$H/scripts" "$H/plantillas"
+cp -Rf "$SK/scripts/." "$H/scripts/"
+cp -Rf "$SK/templates/." "$H/plantillas/"
 chmod +x "$H"/scripts/*.sh "$H"/scripts/*.py 2>/dev/null || true
 [ -f "$H/motor/package.json" ] || { mkdir -p "$H/motor" && cp -R "$SK/templates/motor/." "$H/motor/"; }
 
