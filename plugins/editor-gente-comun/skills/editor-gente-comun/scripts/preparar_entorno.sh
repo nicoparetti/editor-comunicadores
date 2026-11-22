@@ -27,7 +27,7 @@ estado() {
   [ -d "$H/hyperframes/node_modules/onnxruntime-node" ] && [ -f "$H/modelos/u2net_human_seg.onnx" ] && ok "Recorte de persona (u2net)" || falta "Recorte de persona" "paso recorte"
   "$H/venv/bin/python" -c "import cv2, fontTools" 2>/dev/null && [ -f "$H/modelos/face_detection_yunet_2023mar.onnx" ] && ok "OpenCV + YuNet (encuadre vertical de clips)" || falta "OpenCV/YuNet" "paso venv y paso recorte"
   [ -x "$WHISPER_BIN" ] && ok "whisper.cpp" || falta "whisper.cpp" "paso whisper"
-  [ -f "$WHISPER_MODEL" ] && ok "Modelo Whisper large-v3-turbo" || { [ -f "$R/0_Instalar/ggml-large-v3-turbo.bin" ] && falta "Modelo Whisper (ya descargado en 0_Instalar)" "paso modelo" || falta "Modelo Whisper" "pedir doble clic en 0_Instalar/Descargar transcriptor y arrastrar el archivo a 0_Instalar"; }
+  [ -f "$WHISPER_MODEL" ] && ok "Modelo Whisper large-v3-turbo" || { [ -f "$R/0_Instalar/ggml-large-v3-turbo.bin" ] && falta "Modelo Whisper (ya descargado en 0_Instalar)" "paso modelo" || falta "Modelo Whisper" "paso modelo (lo descarga solo; si está bloqueado, plan B de la bienvenida)"; }
   if [ -x "$H/mac/yt-dlp_macos" ] && [ -x "$H/mac/ffmpeg" ]; then ok "Descarga de referencias (Mac)"
   elif [ -f "$H/win/yt-dlp.exe" ] && [ -f "$H/win/ffmpeg.exe" ]; then ok "Descarga de referencias (Windows)"
   else falta "Descarga de referencias" "paso mac (si la persona usa Mac) o paso win (si usa Windows)"; fi
@@ -72,9 +72,21 @@ case "${1:-estado}" in
     [ -f /tmp/wbuild/CMakeCache.txt ] || "$H/venv/bin/cmake" -S /tmp/wsrc -B /tmp/wbuild -DBUILD_SHARED_LIBS=OFF -DWHISPER_BUILD_TESTS=OFF -DGGML_NATIVE=OFF -DCMAKE_BUILD_TYPE=Release >/dev/null
     timeout 150 "$H/venv/bin/cmake" --build /tmp/wbuild -j4 --target whisper-cli >/dev/null && cp /tmp/wbuild/bin/whisper-cli "$H/whisper/bin/" && ok "whisper.cpp (si cortó por tiempo, volver a correr este paso)" ;;
   modelo)
-    F="$R/0_Instalar/ggml-large-v3-turbo.bin"; [ -f "$F" ] || { echo "No está $F"; exit 1; }
-    T=$(stat -c%s "$F"); [ "$T" -gt 1500000000 ] || { echo "El archivo está incompleto ($T bytes): volver a descargarlo"; exit 1; }
-    mkdir -p "$H/whisper" && mv "$F" "$WHISPER_MODEL" && ok "Modelo Whisper movido a .herramientas/whisper" ;;
+    # 1) Si la persona ya lo dejó en 0_Instalar (o se movió desde Descargas), se verifica y se guarda.
+    F="$R/0_Instalar/ggml-large-v3-turbo.bin"
+    if [ -f "$F" ]; then
+      T=$(stat -c%s "$F"); [ "$T" -gt 1500000000 ] || { echo "El archivo está incompleto ($T bytes): volver a descargarlo"; exit 1; }
+      mkdir -p "$H/whisper" && mv "$F" "$WHISPER_MODEL" && ok "Modelo Whisper movido a .herramientas/whisper"; exit 0
+    fi
+    [ -f "$WHISPER_MODEL" ] && { ok "Modelo Whisper ya instalado"; exit 0; }
+    # 2) Si no, se descarga directo, por tramos (cada llamada baja lo que puede en ~160 s y sigue donde quedó).
+    mkdir -p "$H/whisper"; P="$WHISPER_MODEL.parcial"
+    URL="https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin"
+    timeout 160 curl -sS -L -C - --fail -o "$P" "$URL"; RC=$?
+    T=$(stat -c%s "$P" 2>/dev/null || echo 0)
+    if [ "$T" -ge 1624555275 ]; then mv "$P" "$WHISPER_MODEL" && ok "Modelo Whisper descargado e instalado"
+    elif [ "$T" -gt 0 ]; then echo "  [SIGUE] Modelo Whisper: $((T/1048576)) de 1549 MB. Volver a correr: paso modelo"
+    else echo "  [BLOQUEADO] No se pudo descargar el modelo desde acá (código $RC). Plan B: bienvenida.md, paso 3.5"; exit 1; fi ;;
   manuales)
     # se clona en /tmp (git no puede trabajar bien dentro de la carpeta compartida) y se copia sin .git
     mkdir -p "$H/manuales" && rm -rf /tmp/remotion-skills && timeout 90 git clone -q --depth 1 https://github.com/remotion-dev/skills.git /tmp/remotion-skills \
