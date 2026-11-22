@@ -14,6 +14,7 @@ Usa este texto tal cual (solo adapta *ti/vos* si ya sabes cómo habla la persona
 > - Sacar clips verticales de prédicas, clases o videos largos.
 > - Poner subtítulos medidos a cualquier video.
 > - Hacer portadas para tus reels y para YouTube.
+> - Ordenar tus ideas en un hub de contenido: un documento donde cada video tiene su guion, su edición sugerida y el copy para publicar.
 >
 > Lo que me hace distinto es que no aplico efectos por aplicar. Por ejemplo: aplico zooms donde tienen sentido, mis efectos tienen un porqué y cada sonido que pongo está atado a algo que aparece en pantalla.
 >
@@ -58,11 +59,17 @@ Copia `templates/mi-perfil.md` a `5_Mi estilo/mi-perfil.md` y complétalo con su
 
 ## 5. Su hub de contenido (no lo saltees)
 
-Explícale en dos frases qué es: un documento donde vive cada contenido (guion, recomendaciones de edición, recursos, copy), conectado al editor, para que cuando diga "edita el reel de X" ya sepas todo. Después créalo siguiendo `hub.md`.
+Explícale en dos frases qué es: un documento donde vive cada contenido (guion, recomendaciones de edición, recursos, copy para publicar), conectado al editor, para que cuando diga "edita el reel de X" ya sepas todo. Después créalo siguiendo `hub.md`.
+
+**Muéstraselo.** Cuando esté creado, ábreselo (o pásale el enlace) y recórrelo con ella en tres líneas: la pestaña 1 con el cuadro de todos sus contenidos, "Ideas en espera" y "Decisiones fijas", y que cada contenido nuevo tiene su propia pestaña. Ofrécele crear ya la primera pestaña con una idea que tenga en mente.
+
+**Si no tienes la herramienta de documentos de Claude** en esta conversación, crea el hub como archivo `Hub de contenido.md` en la carpeta `Editor de Videos IA` (misma estructura) y díselo.
 
 **Si dice que no o que después, insiste con amabilidad**, porque es importante que lo tenga hecho: *"Te recomiendo mucho crearlo ahora: son dos minutos y hace que cada edición sea más rápida y más fiel a lo que pensaste. Yo lo armo; tú solo tienes que guardar un archivo en tu proyecto."* Si aun así prefiere no hacerlo, respétalo y recuérdaselo una sola vez más, al cerrar su primer video.
 
 ## 6. Cierre
+
+Antes de cerrar, revisa que estén las tres cosas: la carpeta con las herramientas, el perfil guardado y el hub creado (o que la persona haya dicho que no). Si falta el hub y no dijo que no, vuelve al paso 5: la instalación larga del paso 3 no es excusa para saltearlo.
 
 Termina con tres ejemplos de pedidos que puede hacer ya mismo, adaptados a lo que respondió. Por ejemplo:
 - "Subí un video a 1_Videos sin editar, edítalo como reel."
