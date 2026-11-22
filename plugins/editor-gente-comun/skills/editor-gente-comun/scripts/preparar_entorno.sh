@@ -45,12 +45,13 @@ case "${1:-estado}" in
     [ -x "$H/venv/bin/python" ] || python3 -m venv "$H/venv"
     timeout 170 "$H/venv/bin/pip" install -q --upgrade yt-dlp cmake pillow numpy fonttools opencv-python-headless==4.10.0.84 && ok "venv con yt-dlp, cmake, PIL y numpy" ;;
   chromium)
-    mkdir -p "$H/chromium/bin" && cd "$H/chromium" || exit 1
+    # se descarga y descomprime en /tmp: así no quedan restos en la carpeta (borrar ahí necesita permiso)
+    mkdir -p "$H/chromium/bin" /tmp/chromium-pack && cd /tmp/chromium-pack || exit 1
     [ -f pack.tar ] || timeout 150 curl -sSfL -o pack.tar "$CHROMIUM_PACK" || { echo "No se pudo descargar Chromium"; exit 1; }
     rm -rf x && mkdir x && tar -xf pack.tar -C x && cd x && node -e '
       const fs=require("fs"),z=require("zlib");
       for (const f of ["chromium.br","swiftshader.tar.br"]) fs.writeFileSync(f.replace(".br",""), z.brotliDecompressSync(fs.readFileSync(f)));' \
-      && mv chromium ../bin/chromium && chmod +x ../bin/chromium && tar -xf swiftshader.tar -C ../bin && cd .. && rm -rf x pack.tar
+      && cp chromium "$H/chromium/bin/chromium" && chmod +x "$H/chromium/bin/chromium" && tar -xf swiftshader.tar -C "$H/chromium/bin" && cd /tmp && rm -rf /tmp/chromium-pack
     "$CHROMIUM_BIN" --version && ok "Chromium" ;;
   motor)
     [ -f "$H/motor/package.json" ] || { [ -d "$H/plantillas/motor" ] && cp -R "$H/plantillas/motor/." "$H/motor/"; }
@@ -75,7 +76,9 @@ case "${1:-estado}" in
     T=$(stat -c%s "$F"); [ "$T" -gt 1500000000 ] || { echo "El archivo está incompleto ($T bytes): volver a descargarlo"; exit 1; }
     mkdir -p "$H/whisper" && mv "$F" "$WHISPER_MODEL" && ok "Modelo Whisper movido a .herramientas/whisper" ;;
   manuales)
-    mkdir -p "$H/manuales" && cd "$H/manuales" && rm -rf remotion && timeout 90 git clone -q --depth 1 https://github.com/remotion-dev/skills.git remotion && rm -rf remotion/.git
+    # se clona en /tmp (git no puede trabajar bien dentro de la carpeta compartida) y se copia sin .git
+    mkdir -p "$H/manuales" && rm -rf /tmp/remotion-skills && timeout 90 git clone -q --depth 1 https://github.com/remotion-dev/skills.git /tmp/remotion-skills \
+      && rm -rf /tmp/remotion-skills/.git && mkdir -p "$H/manuales/remotion" && cp -R /tmp/remotion-skills/. "$H/manuales/remotion/" && cd "$H/manuales"
     ln -sfn ../hyperframes/node_modules/hyperframes/dist/skills hyperframes && ok "manuales" ;;
   mac)
     mkdir -p "$H/mac" && cd "$H/mac" && { [ -x yt-dlp_macos ] || timeout 80 curl -sSfL -o yt-dlp_macos https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos; } \
