@@ -387,3 +387,4 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
 @media (max-width:900px){.hero .autor{font-size:14px}}
 .hero p.autor{font-size:16px;margin-top:2px;line-height:1.35}
 @media (max-width:900px){.hero p.autor{font-size:14px}}
+@media (max-width:900px){.hero h1{font-size:8.1vw}}
