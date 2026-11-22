@@ -458,3 +458,6 @@ footer .pie p+p{margin-top:2px}
 .brillo-final .boton.naranja{box-shadow:0 14px 36px -8px rgba(224,123,42,.8),0 0 40px rgba(224,123,42,.3)}
 @media (max-width:900px){.brillo-final::before{width:360px;margin-left:-180px}}
 #btn-compartir{background:var(--tinta);color:var(--crema);box-shadow:none}
+.presenta{position:relative;border:1px solid rgba(224,123,42,.45);background:linear-gradient(160deg,var(--papel) 60%,rgba(224,123,42,.10));box-shadow:0 0 0 1px rgba(224,123,42,.12),0 18px 44px -22px rgba(224,123,42,.55);padding-left:20px}
+.presenta::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:0 4px 4px 0;background:var(--naranja)}
+.presenta img{box-shadow:0 0 0 3px var(--crema),0 0 0 5px var(--naranja)}
