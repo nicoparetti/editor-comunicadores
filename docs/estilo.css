@@ -362,3 +362,22 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
   .autor{font-size:14px}
 }
 @media (min-width:901px){.hero h1{font-size:clamp(44px,3.9vw,56px)}}
+
+/* v9 */
+.hero h1 .h1a{white-space:nowrap}
+.autor{display:block;font-size:15px;color:var(--gris);margin-top:16px}
+.escena-hero .burbuja{box-shadow:0 22px 44px -16px rgba(27,31,36,.45);border-color:var(--linea)}
+.escena-hero .burbuja.ia{box-shadow:0 0 0 1px rgba(224,123,42,.35),0 0 34px 2px rgba(224,123,42,.45),0 22px 44px -16px rgba(27,31,36,.55)}
+.sc-yo{font-family:Cal,sans-serif;font-style:italic;font-synthesis:style;font-size:clamp(40px,4.6vw,60px);line-height:1;letter-spacing:-.03em;color:var(--naranja);margin-bottom:14px}
+.sin-codigo h2{font-size:clamp(26px,2.6vw,36px);line-height:1.12;margin-bottom:16px}
+.faq{padding:0 0 100px}
+.cierre{padding-bottom:70px}
+@media (max-width:900px){
+  .hero h1{font-size:8.6vw;line-height:1.05}
+  .hero h1 .serif{white-space:nowrap}
+  .sc-yo{font-size:34px}
+  .sin-codigo h2{font-size:23px}
+  .criterios{padding-bottom:40px}
+  .hub{padding:20px 0 60px;gap:26px}
+  .faq{padding-bottom:110px}
+}
