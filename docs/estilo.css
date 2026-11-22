@@ -462,3 +462,4 @@ footer .pie p+p{margin-top:2px}
 .presenta::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:0 4px 4px 0;background:var(--naranja)}
 .presenta img{box-shadow:0 0 0 3px var(--crema),0 0 0 5px var(--naranja)}
 .presenta{align-items:flex-start;padding:16px 16px 16px 20px}
+.tipo.estrella .visual .burbuja.ia{background:var(--tinta);box-shadow:0 0 0 1.5px rgba(224,123,42,.55),0 0 36px 4px rgba(224,123,42,.45),0 22px 44px -16px rgba(0,0,0,.6)}
