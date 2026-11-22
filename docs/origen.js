@@ -24,3 +24,27 @@ window.CONFIG = {
     });
   }
 })();
+
+// Aparecer al bajar y puntos del carrusel de formatos
+document.addEventListener("DOMContentLoaded", function () {
+  var sel = ".tipos-cabeza,.tipo,.sin-codigo,.criterios h2,.aviso,.pieza,.adapta,.hub>div,.ventana,.cta-final,.paso";
+  var els = document.querySelectorAll(sel);
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    els.forEach(function (el) { el.classList.add("aparece"); io.observe(el); });
+  }
+  var carril = document.querySelector(".tipos-carril"), puntos = document.querySelectorAll(".carril-puntos i");
+  if (carril && puntos.length) {
+    var marcar = function () {
+      var hijos = carril.children, centro = carril.scrollLeft + carril.clientWidth / 2, mejor = 0, dist = 1e9;
+      for (var i = 0; i < hijos.length; i++) {
+        var c = hijos[i].offsetLeft + hijos[i].offsetWidth / 2, d = Math.abs(c - centro);
+        if (d < dist) { dist = d; mejor = i; }
+      }
+      puntos.forEach(function (p, i) { p.classList.toggle("on", i === mejor); });
+    };
+    carril.addEventListener("scroll", marcar, { passive: true }); marcar();
+  }
+});
