@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Instalá la herramienta · Editor para gente común</title>
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="estilo.css?v=1795348390">
+<link rel="stylesheet" href="estilo.css?v=1795348579">
 </head>
 <body>
 <div class="envoltura" style="max-width:900px">
@@ -38,8 +38,6 @@
       <li><strong>Instalá «Editor para gente común».</strong><br><span class="gris">Aparece en la lista. Tocalo e instalalo.</span></li>
       <li><strong>Empezá.</strong><br><span class="gris">Abrí un chat nuevo y escribí:</span><br><span class="copiable"><code>/empezar</code><button type="button" class="copiar" data-copiar="/empezar">Copiar</button></span><br><span class="gris">La herramienta te prepara las carpetas y te guía desde ahí.</span></li>
     </ol>
-
-    <p class="nota" style="margin-top:26px">¿Algo no funciona? Escribime por Instagram a <a href="https://instagram.com/nicoyestefi" target="_blank" rel="noopener">@nicoyestefi</a>.</p>
   </section>
 
   <div class="regalo r2">
@@ -58,14 +56,14 @@
     <a class="boton" id="btn-ig" target="_blank" rel="noopener">Seguir en Instagram</a>
   </div>
 
-  <div class="compartir">
+  <div class="compartir brillo-final">
     <h3>¿Conocés a alguien <span class="nowrap">que necesita esto?</span></h3>
     <p class="gris">Compartile la herramienta. <span class="nowrap">Es gratis para todos.</span></p>
-    <a class="boton secundario" id="btn-compartir" target="_blank" rel="noopener">Compartila por WhatsApp</a>
+    <a class="boton naranja" id="btn-compartir" target="_blank" rel="noopener">Compartila por WhatsApp</a>
   </div>
 </div>
 
-<footer><div class="envoltura">Creado por Nicolás Paretti · <a id="btn-repo" target="_blank" rel="noopener">Ver en GitHub</a></div></footer>
+<footer><div class="envoltura pie"><p>¿Algo no funciona? Escribime por Instagram a <a href="https://instagram.com/nicoyestefi" target="_blank" rel="noopener">@nicoyestefi</a>.</p><p>Creado por Nico Paretti • <a id="btn-repo" target="_blank" rel="noopener">Ver en GitHub</a></p></div></footer>
 
 <script src="origen.js?v=1795312662"></script>
 <script>
@@ -76,7 +74,7 @@ var vid = document.getElementById("video");
 if (C.videoInstalacion) {
   vid.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + C.videoInstalacion +
     '?rel=0" title="Cómo instalar la herramienta" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-} else { vid.classList.add("video-chico"); }
+}
 document.getElementById("btn-yt").href = "https://www.youtube.com/@" + C.youtube + "?sub_confirmation=1";
 document.getElementById("btn-ig").href = "https://instagram.com/" + C.instagram;
 document.getElementById("btn-repo").href = C.repo;

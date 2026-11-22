@@ -445,3 +445,15 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
 .regalo .firma .abrazo{display:block;font-family:Inter;font-style:normal;font-size:16px;color:var(--gris);margin-bottom:2px}
 @media (max-width:900px){.hub h2{font-size:30px}}
 @media (min-width:901px){.hub{grid-template-columns:1fr 1.15fr}.hub h2{font-size:clamp(34px,3.4vw,46px)}}
+/* instalar: cierre con color */
+footer .pie p{margin:0;line-height:1.5}
+footer .pie p+p{margin-top:2px}
+.regalo.r2{position:relative;border-color:rgba(224,123,42,.45);box-shadow:0 0 0 1px rgba(224,123,42,.12),0 24px 60px -24px rgba(224,123,42,.55);background:linear-gradient(160deg,var(--papel) 60%,rgba(224,123,42,.10))}
+.regalo.r2::before{content:"";position:absolute;left:0;top:26px;bottom:26px;width:4px;border-radius:0 4px 4px 0;background:var(--naranja)}
+.regalo.r2 .regalo-cab img{box-shadow:0 0 0 3px var(--crema),0 0 0 5px var(--naranja)}
+.destacado.simple{border-color:var(--naranja);background:rgba(224,123,42,.07);box-shadow:0 18px 44px -22px rgba(224,123,42,.6)}
+.destacado.simple .boton{background:var(--naranja);color:var(--tinta);box-shadow:0 8px 22px -8px rgba(224,123,42,.8)}
+.brillo-final{position:relative}
+.brillo-final::before{content:"";position:absolute;left:50%;top:50%;width:520px;height:320px;margin:-160px 0 0 -260px;background:radial-gradient(closest-side,rgba(224,123,42,.28),rgba(224,123,42,0));pointer-events:none;z-index:-1}
+.brillo-final .boton.naranja{box-shadow:0 14px 36px -8px rgba(224,123,42,.8),0 0 40px rgba(224,123,42,.3)}
+@media (max-width:900px){.brillo-final::before{width:360px;margin-left:-180px}}
