@@ -457,3 +457,4 @@ footer .pie p+p{margin-top:2px}
 .brillo-final::before{content:"";position:absolute;left:50%;top:50%;width:520px;height:320px;margin:-160px 0 0 -260px;background:radial-gradient(closest-side,rgba(224,123,42,.28),rgba(224,123,42,0));pointer-events:none;z-index:-1}
 .brillo-final .boton.naranja{box-shadow:0 14px 36px -8px rgba(224,123,42,.8),0 0 40px rgba(224,123,42,.3)}
 @media (max-width:900px){.brillo-final::before{width:360px;margin-left:-180px}}
+#btn-compartir{background:var(--tinta);color:var(--crema);box-shadow:none}
