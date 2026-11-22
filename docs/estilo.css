@@ -427,3 +427,9 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
   .primer-video .copiable code{font-size:13.5px}
   .compartir h3{font-size:23px}
 }
+.nowrap{white-space:nowrap}
+.destacado.simple{background:transparent;color:var(--tinta);border:1.5px solid var(--tinta);padding:20px 24px;gap:14px;border-radius:20px;margin:30px 0 10px}
+.destacado.simple h3{font-size:22px;margin-bottom:2px}
+.destacado.simple p{color:var(--gris);font-size:15.5px}
+.destacado.simple .boton{background:var(--tinta);color:var(--crema);font-size:15px;padding:11px 20px;box-shadow:none}
+@media (max-width:900px){.destacado.simple{flex-direction:column;align-items:flex-start}}
