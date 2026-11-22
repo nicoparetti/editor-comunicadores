@@ -48,3 +48,13 @@ document.addEventListener("DOMContentLoaded", function () {
     carril.addEventListener("scroll", marcar, { passive: true }); marcar();
   }
 });
+
+// Botón fijo en celular: aparece al pasar el hero y se esconde en el cierre
+document.addEventListener("DOMContentLoaded", function () {
+  var barra = document.querySelector(".barra-movil"), hero = document.querySelector(".hero"), cierre = document.querySelector(".cierre");
+  if (!barra || !hero || !("IntersectionObserver" in window)) return;
+  var heroVisible = true, cierreVisible = false;
+  var act = function () { barra.classList.toggle("visible", !heroVisible && !cierreVisible); };
+  new IntersectionObserver(function (e) { heroVisible = e[0].isIntersecting; act(); }).observe(hero);
+  if (cierre) new IntersectionObserver(function (e) { cierreVisible = e[0].isIntersecting; act(); }).observe(cierre);
+});

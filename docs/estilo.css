@@ -338,3 +338,27 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
   .aviso b{display:block;margin-top:8px}
 }
 @media (max-width:900px){.tipos-carril .tipo .visual .burbuja{display:none}.tipos-carril .tipo .visual{height:310px}.sin-codigo h2{font-size:28px}}
+
+/* v8 */
+.autor{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:15px;color:var(--gris)}
+.autor img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+.autor b{color:var(--tinta);font-weight:600}
+.ayuda{font-size:13.5px;color:var(--gris);margin-top:6px}
+.faq{padding:40px 0 30px}
+.faq h2{margin-bottom:26px}
+.faq-lista{max-width:820px;border-top:1.5px solid var(--tinta)}
+.faq details{border-bottom:1px solid var(--linea)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 44px 22px 0;font-family:Cal;font-size:24px;letter-spacing:-.02em;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);font-family:Inter;font-size:28px;color:var(--naranja);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.faq details p{color:var(--gris);padding:0 40px 22px 0;max-width:680px}
+.barra-movil{display:none}
+@media (max-width:900px){
+  .faq summary{font-size:19px;padding:18px 40px 18px 0}
+  .faq details p{font-size:16px}
+  .barra-movil{display:flex;justify-content:center;position:fixed;left:14px;right:14px;bottom:14px;z-index:50;padding:17px 20px;font-size:17px;box-shadow:0 12px 30px -6px rgba(224,123,42,.7),0 4px 14px rgba(27,31,36,.25);transform:translateY(140%);transition:transform .35s ease}
+  .barra-movil.visible{transform:none}
+  .autor{font-size:14px}
+}
+@media (min-width:901px){.hero h1{font-size:clamp(44px,3.9vw,56px)}}
