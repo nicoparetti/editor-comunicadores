@@ -11,6 +11,10 @@ SK="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"          # la skill dentro
 REPO="$(cd "$SK/../../../.." && pwd)"                            # raíz del repositorio
 [ -d "$REPO/carpeta" ] || { echo "No encuentro la carpeta base en el repositorio ($REPO/carpeta)"; exit 1; }
 H="$R/.herramientas"
+# Seguridad: si la carpeta ya tiene herramientas de otro editor, no se toca
+if [ -f "$H/scripts/entorno.sh" ] && ! grep -q "editor-gente-comun" "$H/scripts/entorno.sh"; then
+  echo "  [ALTO] Esta carpeta ya tiene las herramientas de otro editor. No la toco: usá una carpeta con otro nombre."; exit 2
+fi
 mkdir -p "$R" "$H"
 
 # 1) Carpetas, recursos y archivos de doble clic: se copian sin pisar lo existente
