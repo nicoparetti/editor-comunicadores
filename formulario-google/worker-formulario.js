@@ -58,12 +58,16 @@ async function enviarABrevo(clave, email, pila, apellido, via) {
     body: JSON.stringify(cuerpo)
   });
 
-  await pedir("/contacts", {
+  const contacto = await pedir("/contacts", {
     email,
     attributes: { FIRSTNAME: pila, LASTNAME: apellido },
     listIds: [LISTA_BREVO],
     updateEnabled: true
   });
+
+  // Brevo responde 201 si el contacto es nuevo y 204 si ya existía.
+  // Solo la primera vez se envía la bienvenida, para no gastar envíos.
+  if (contacto.status !== 201) return;
 
   await pedir("/smtp/email", {
     sender: REMITENTE,
