@@ -5,43 +5,57 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Instalá la herramienta · Editor para gente común</title>
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="estilo.css?v=1795311615">
+<link rel="stylesheet" href="estilo.css?v=1795312662">
 </head>
 <body>
 <div class="envoltura" style="max-width:900px">
   <header class="arriba"><a class="marca" href="index.html">Editor para <b>gente común</b></a></header>
 
-  <div style="text-align:center;padding:40px 0 30px">
+  <div class="solo-movil aviso-compu">
+    <h3>Instalala desde tu compu</h3>
+    <p>La herramienta funciona en la computadora. Mandate este enlace para tenerlo a mano.</p>
+    <div class="aviso-botones">
+      <a class="boton naranja" id="btn-wa-yo" target="_blank" rel="noopener">Enviármelo por WhatsApp</a>
+      <button class="boton secundario" type="button" id="btn-copiar-enlace">Copiar enlace</button>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:30px 0 26px">
     <span class="etiqueta">Listo, ya es tuya.</span>
-    <h1 style="font-size:clamp(36px,5vw,58px)">Instalala en cinco minutos</h1>
-    <p class="gris" style="margin-top:16px">Mirá el video y seguí los pasos. Guardá esta página por si la necesitás después.</p>
+    <h1 style="font-size:clamp(36px,5vw,58px)">Instalala en cuatro pasos</h1>
+    <p class="gris" style="margin-top:14px">Mirá el video y seguí los pasos. Guardá esta página por si la necesitás después.</p>
   </div>
 
   <div class="video" id="video">
-    <div class="pendiente"><strong style="color:var(--txt)">Video de instalación</strong><span>Muy pronto acá. Mientras tanto, seguí los pasos de abajo.</span></div>
+    <div class="pendiente"><strong>Video de instalación</strong><span>Muy pronto acá. Mientras tanto, seguí los pasos de abajo.</span></div>
   </div>
 
+  <section class="instalar-pasos">
+    <h2>Cómo instalarla</h2>
+    <ol class="pasos">
+      <li><strong>Tené Claude Pro y la app de escritorio.</strong><br><span class="gris">Descargala en <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a> e iniciá sesión con tu cuenta Pro.</span><br><span class="gris chico">¿Todavía no tenés Pro? <a href="https://claude.com/pricing" target="_blank" rel="noopener">Suscribite acá</a>.</span></li>
+      <li><strong>Agregá la herramienta.</strong><br><span class="gris">En Claude, abrí la sección de complementos, elegí agregar desde GitHub y escribí:</span><br><span class="copiable"><code>nicoparetti/editor-gente-comun</code><button type="button" class="copiar" data-copiar="nicoparetti/editor-gente-comun">Copiar</button></span></li>
+      <li><strong>Instalá «Editor para gente común».</strong><br><span class="gris">Aparece en la lista. Tocalo e instalalo.</span></li>
+      <li><strong>Empezá.</strong><br><span class="gris">Abrí un chat nuevo y escribí:</span><br><span class="copiable"><code>/empezar</code><button type="button" class="copiar" data-copiar="/empezar">Copiar</button></span><br><span class="gris">La herramienta te prepara las carpetas y te guía desde ahí.</span></li>
+    </ol>
+
+    <div class="primer-video">
+      <h3>Tu primer video</h3>
+      <p>Grabá un minuto hablando a cámara, subilo al chat y escribí:</p>
+      <span class="copiable"><code>Editá este reel con los criterios de reel a cámara.</code><button type="button" class="copiar" data-copiar="Editá este reel con los criterios de reel a cámara.">Copiar</button></span>
+    </div>
+
+    <p class="nota" style="margin-top:26px">¿Algo no funciona? Escribime por Instagram a <a href="https://instagram.com/nicoyestefi" target="_blank" rel="noopener">@nicoyestefi</a>.</p>
+  </section>
+
   <div class="regalo">
-    <img src="img/nico.jpg?v=1795309992" alt="Nicolás Paretti">
+    <img src="img/nico.jpg?v=1795312652" alt="Nicolás Paretti">
     <div>
       <h3>Semanas de trabajo, ahora tuyas</h3>
       <p>Probé muchas herramientas que no servían para enseñar. Así que investigué, desarrollé y creé esta para mí durante semanas. Hoy te regalo ese trabajo, porque quiero compartirlo.</p>
       <p class="firma">Nico</p>
     </div>
   </div>
-
-  <section style="padding:40px 0 60px">
-    
-    <h2>Cómo instalarla</h2>
-    <ol class="pasos">
-      <li><strong>Tené Claude Pro y la app de escritorio.</strong><br><span class="gris">Descargala en <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download</a> e iniciá sesión con tu cuenta Pro.</span></li>
-      <li><strong>Agregá la herramienta.</strong><br><span class="gris">En Claude, abrí la sección de complementos, elegí agregar desde GitHub y escribí:</span><br><code>nicoparetti/editor-gente-comun</code></li>
-      <li><strong>Instalá «Editor para gente común».</strong><br><span class="gris">Aparece en la lista. Tocalo e instalalo.</span></li>
-      <li><strong>Empezá.</strong><br><span class="gris">Abrí un chat nuevo y escribí</span> <code>/empezar</code><span class="gris">. La herramienta te prepara las carpetas y te guía desde ahí.</span></li>
-    </ol>
-    <p class="nota" style="margin-top:26px">¿Algo no funciona? Escribime por Instagram a <a href="https://instagram.com/nicoyestefi" target="_blank" rel="noopener">@nicoyestefi</a>.</p>
-    <p style="margin-top:20px"><a class="boton secundario" id="btn-repo" target="_blank" rel="noopener">Ver la herramienta en GitHub</a></p>
-  </section>
 
   <!-- Pedido según el origen: a quien viene de Instagram, YouTube; a quien viene de YouTube, Instagram -->
   <div class="destacado" id="pedido-yt" style="display:none">
@@ -53,26 +67,41 @@
     <a class="boton" id="btn-ig" target="_blank" rel="noopener">Seguir en Instagram</a>
   </div>
 
+  <div class="compartir">
+    <h3>¿Conocés a alguien con un mensaje?</h3>
+    <p class="gris">Compartile la herramienta. Es gratis para todos.</p>
+    <a class="boton secundario" id="btn-compartir" target="_blank" rel="noopener">Compartila por WhatsApp</a>
+  </div>
 </div>
 
-<footer><div class="envoltura">Creado por Nicolás Paretti · Compartila con alguien que tenga un mensaje 🙌</div></footer>
+<footer><div class="envoltura">Creado por Nicolás Paretti · <a id="btn-repo" target="_blank" rel="noopener">Ver en GitHub</a></div></footer>
 
-<script src="origen.js?v=1795309992"></script>
+<script src="origen.js?v=1795312662"></script>
 <script>
 var C = window.CONFIG, o = window.ORIGEN;
+var LANDING = "https://nicoparetti.github.io/editor-gente-comun/";
+var AQUI = LANDING + "instalar.html";
+var vid = document.getElementById("video");
 if (C.videoInstalacion) {
-  document.getElementById("video").innerHTML =
-    '<iframe src="https://www.youtube-nocookie.com/embed/' + C.videoInstalacion +
+  vid.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + C.videoInstalacion +
     '?rel=0" title="Cómo instalar la herramienta" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-}
+} else { vid.classList.add("video-chico"); }
 document.getElementById("btn-yt").href = "https://www.youtube.com/@" + C.youtube + "?sub_confirmation=1";
 document.getElementById("btn-ig").href = "https://instagram.com/" + C.instagram;
 document.getElementById("btn-repo").href = C.repo;
-// Instagram -> pedir YouTube primero. YouTube -> pedir Instagram primero. Directo -> ambos.
+document.getElementById("btn-wa-yo").href = "https://wa.me/?text=" + encodeURIComponent("Instalar la herramienta de edición en mi compu: " + AQUI);
+document.getElementById("btn-compartir").href = "https://wa.me/?text=" + encodeURIComponent("Mirá esta herramienta gratis para editar videos con IA, pensada para comunicadores y líderes cristianos: " + LANDING);
 var yt = document.getElementById("pedido-yt"), ig = document.getElementById("pedido-ig");
 if (o === "ig") { yt.style.display = "flex"; }
 else if (o === "yt") { ig.style.display = "flex"; }
 else { yt.style.display = "flex"; ig.style.display = "flex"; }
+function copiar(txt, btn) {
+  var listo = function () { var t = btn.textContent; btn.textContent = "Copiado"; btn.classList.add("ok"); setTimeout(function () { btn.textContent = t; btn.classList.remove("ok"); }, 1600); };
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(listo, listo);
+  else { var a = document.createElement("textarea"); a.value = txt; document.body.appendChild(a); a.select(); try { document.execCommand("copy"); } catch (e) {} a.remove(); listo(); }
+}
+document.querySelectorAll(".copiar").forEach(function (b) { b.addEventListener("click", function () { copiar(b.dataset.copiar, b); }); });
+document.getElementById("btn-copiar-enlace").addEventListener("click", function () { copiar(AQUI, this); });
 </script>
 </body>
 </html>

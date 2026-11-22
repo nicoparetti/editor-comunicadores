@@ -285,7 +285,6 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
 }
 @media (max-width:900px){.adapta{gap:14px;padding:26px 22px}.adapta svg{width:54px;height:54px}}
 @media (max-width:900px){.onda i{max-height:52px}.pieza:nth-child(2) .muestra{justify-content:center;gap:4px}}
-@media (max-width:900px){.pasos code{white-space:normal;word-break:break-all;font-size:14px}}
 
 /* v7 */
 .hero .boton.naranja{box-shadow:0 0 0 0 rgba(224,123,42,.5),0 14px 40px -6px rgba(224,123,42,.75),0 0 60px rgba(224,123,42,.35)}
@@ -394,3 +393,37 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
 @media (max-width:900px){.aviso{font-size:3.45vw;white-space:nowrap;line-height:1.5}.aviso b{margin-top:2px}}
 @media (max-width:900px){.aviso{font-size:16.5px;white-space:normal}}
 @media (max-width:374px){.aviso{font-size:15px}}
+
+/* instalar v2 */
+.solo-movil{display:none}
+.aviso-compu{background:var(--tinta);color:var(--crema);border-radius:22px;padding:22px 20px;margin:6px 0 4px}
+.aviso-compu h3{font-size:24px;margin-bottom:6px}
+.aviso-compu p{color:#C9C3B8;font-size:15.5px;margin-bottom:14px}
+.aviso-botones{display:flex;flex-direction:column;gap:10px}
+.aviso-botones .boton{justify-content:center;font-size:16px;padding:14px 20px}
+.aviso-compu .boton.secundario{color:var(--crema);border-color:#4a5058}
+.video .pendiente strong{color:var(--crema)}
+.video.video-chico{aspect-ratio:auto;border-radius:18px;box-shadow:none}
+.video.video-chico .pendiente{position:static;flex-direction:row;flex-wrap:wrap;gap:6px 10px;padding:16px 20px;font-size:15px}
+.video.video-chico .pendiente strong{font-size:18px}
+.instalar-pasos{padding:36px 0 30px}
+.instalar-pasos h2{margin-bottom:6px}
+.chico{font-size:15px}
+.copiable{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px;max-width:100%}
+.copiable code{white-space:nowrap;overflow-wrap:normal;word-break:normal}
+.copiar{font:inherit;font-size:13.5px;font-weight:600;border:1.5px solid var(--tinta);background:transparent;color:var(--tinta);border-radius:999px;padding:5px 13px;cursor:pointer}
+.copiar.ok{background:var(--tinta);color:var(--crema)}
+.primer-video{margin-top:30px;padding:26px 28px;background:var(--papel);border:1.5px solid var(--naranja);border-radius:22px}
+.primer-video h3{font-size:26px;margin-bottom:6px}
+.primer-video p{color:var(--gris)}
+.primer-video .copiable code{white-space:normal}
+.compartir{text-align:center;padding:40px 0 70px}
+.compartir h3{font-size:28px;margin-bottom:6px}
+.compartir .boton{margin-top:18px}
+@media (max-width:900px){
+  .solo-movil{display:block}
+  .pasos code{font-size:13.5px;white-space:nowrap;word-break:normal}
+  .primer-video{padding:22px 20px}
+  .primer-video .copiable code{font-size:13.5px}
+  .compartir h3{font-size:23px}
+}
