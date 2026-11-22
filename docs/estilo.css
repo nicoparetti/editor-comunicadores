@@ -385,3 +385,5 @@ label.check{display:flex;gap:12px;align-items:flex-start;margin-top:24px;font-si
 .hero .nota+.autor{margin-top:2px;font-size:inherit;line-height:1.35}
 .hero .autor{font-size:16px}
 @media (max-width:900px){.hero .autor{font-size:14px}}
+.hero p.autor{font-size:16px;margin-top:2px;line-height:1.35}
+@media (max-width:900px){.hero p.autor{font-size:14px}}
