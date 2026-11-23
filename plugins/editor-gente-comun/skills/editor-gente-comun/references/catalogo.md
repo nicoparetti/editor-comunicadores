@@ -8,7 +8,7 @@ Cuando pregunte "¿qué sabes hacer?" (o `/que-sabes-hacer`), muéstrale esto ad
 |---|---|---|
 | **Reel a cámara** (`/editar-reel`) | "Edita el video que subí como reel" | Hoja de edición para aprobar → video terminado con cortes, zooms, subtítulos, sonidos, voz limpia y portada |
 | **Reel con gráficos** (`/reel-graficos`) | "Edita este reel con gráficos" | Lo anterior + tarjetas, mapas, listas, retratos y citas animadas en tres tamaños (al pecho, recuadro grande, pantalla completa) |
-| **Reel animado con tu voz** (`/reel-animado`) | "Monta un reel animado con este audio" | Video 100 % animado, en el estilo de una cuenta que te guste o en el estilo de fábrica; antes, un storyboard de 6 cuadros y un clip de 7 s para aprobar |
+| **Reel animado con tu voz** (`/reel-animado`) | "Monta un reel animado con este audio" | Video 100 % animado, en el estilo de una cuenta que te guste o en uno de los seis precargados (el de fábrica, escala sin fin, caricatura de los 50, RPG de 16 bits, diorama de pixeles, isla isométrica); con tu voz (o una voz sintética si la pides) y música opcional; antes, un storyboard de 6 cuadros y un clip de 7 s para aprobar |
 | **Clips de una prédica o clase** (`/clips`) | "Sácame clips de esta prédica" | Propuestas de clips con cortes exactos → clips verticales subtitulados, con placa final opcional "Disponible en YouTube" |
 | **Subtítulos** (`/subtitulos`) | "Ponle subtítulos" | Subtítulos medidos (mismo tamaño, misma posición, palabras clave destacadas) + archivo `.srt` |
 | **Recorte de un bruto largo** (`/recortar`) | "Recorta este video a 1 minuto" | Guion tachado para aprobar → el corte |

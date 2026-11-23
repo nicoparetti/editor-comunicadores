@@ -70,7 +70,7 @@ Los videos se procesan **en la computadora de la persona** (shell `device_bash`)
 | "Cambia mis colores / fuentes / sonidos" (`/mi-estilo`) | 2–3 propuestas visuales → elige → se guarda en su perfil | `personalizar.md` |
 | "Edita este reel" (`/editar-reel`) | Flujo de 9 pasos (abajo) | perfil + `estilo-por-defecto.md` |
 | "Edita este reel con gráficos" (`/reel-graficos`) | Flujo de 9 pasos con formatos A/B/C, tableros y cita acumulativa | `reels-con-graficos.md` |
-| "Monta el reel animado" (`/reel-animado`) | **Primero el estilo** (referencia de Instagram o por defecto) y, si es el de fábrica, la paleta; **después los materiales**; storyboard de 6 cuadros + clip de 7 s antes de editar | `reels-animados.md` |
+| "Monta el reel animado" (`/reel-animado`) | **Primero el estilo**: crear el suyo a partir de referencias o elegir uno de los precargados (hoja `estilos-animados/hoja_estilos.jpg`); si ya tiene uno, recordarle en una línea que hay otros. **Después, siempre, el audio y los recursos** (voz propia recomendada; voz sintética solo si la pide; imágenes; música sí o no); storyboard de 6 cuadros + clip de 7 s antes de editar | `reels-animados.md` |
 | "Sácame clips de esta prédica / clase" (`/clips`) | Preguntas iniciales (placa, portada, leyenda, animación), propuestas de cortes, aprobación, encuadre vertical, subtítulos, placa | `clips-de-predicaciones.md` |
 | "Ponle subtítulos" (`/subtitulos`) | Solo los pasos 1 y 6, sin tocar su montaje | `estilo-por-defecto.md` → 5 |
 | "Recorta este bruto largo" (`/recortar`) | Guion tachado para aprobar, después el corte | `clips-y-recortes.md` |
@@ -125,6 +125,8 @@ Lleva el estado en `3_Videos editados/<nombre>/ESTADO.md` (plantilla `templates/
 | `references/entorno-y-herramientas.md` | Al empezar una sesión y antes de cualquier comando técnico |
 | `references/zona-segura.md` | Todo lo vertical 1080×1920 |
 | `references/reels-con-graficos.md` · `reels-animados.md` · `clips-de-predicaciones.md` · `clips-y-recortes.md` | Según el formato |
+| `references/estilos-animados/` | Estilos precargados de reels animados: leer el `README.md` para presentarlos y **solo** el archivo del estilo elegido |
+| `references/sonido-real-y-oido.md` | Buscar sonidos y música reales con licencia abierta, revisar la mezcla con el oído, afinar sonidos con tono |
 | `references/portadas.md` · `imagenes.md` | Portadas, carruseles, placas |
 | `references/efectos.md` | Catálogo de efectos, cuándo usar cada uno |
 | `references/kit-graficos.md` · `imagenes-animables.md` | Gráficos reutilizables e imágenes que se pueden animar |

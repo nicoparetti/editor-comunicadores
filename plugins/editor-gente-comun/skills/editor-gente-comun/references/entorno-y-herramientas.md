@@ -29,6 +29,7 @@ El acceso a internet sigue la lista de dominios permitidos de la cuenta.
   - El transcriptor primero lo bajas tú con `preparar_entorno.sh modelo` (por tramos). Solo si da `[BLOQUEADO]`: `0_Instalar/Descargar transcriptor` (página que abre la descarga en su navegador) → la persona arrastra el archivo a `0_Instalar/` y corres `preparar_entorno.sh modelo`. Plan B: `0_Instalar/Instalar transcriptor` (`.command` o `(Windows).bat`), que lo baja directo a `.herramientas/whisper/` (reanudable).
   - `2_Referencias/Descargar referencias` (`.command` o `(Windows).bat`) → baja los links de `2_Referencias/links.txt` con yt-dlp + ffmpeg de su sistema (`.herramientas/mac/` o `.herramientas/win/`); si un link pide sesión (Instagram), reintenta con las cookies de Chrome.
 - **En Windows** la máquina Linux es x64 (en Mac con chip Apple, arm64): `preparar_entorno.sh` elige solo la versión de Chromium. Los `.command` no abren en Windows: sus equivalentes son los `.bat` de `0_Instalar/` y `2_Referencias/`, que usan `yt-dlp.exe` y `ffmpeg.exe` de `.herramientas/win/` (paso `win`). Si Windows muestra "Windows protegió tu PC", la persona toca Más información → Ejecutar de todas formas.
+- **Espacio en la nube**: llega a Openverse, huggingface.co y PyPI. La búsqueda de sonidos (`buscar_sfx.py`) y el oído (`oido.sh`) corren ahí y se reinstalan solos en cada sesión. A la nube solo se sube audio, nunca brutos.
 - Paquetes npm que descargan binarios con su propio cliente fallan con 407: instala con `--ignore-scripts`.
 
 ## Herramientas instaladas (en la carpeta)

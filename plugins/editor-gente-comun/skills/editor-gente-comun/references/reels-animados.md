@@ -10,9 +10,9 @@ Casi todas las correcciones en los reels de referencia fueron de **tiempo** y de
 
 ### 1.1 Antes de nada: el estilo de animación
 
-Pregunta primero qué estilo quiere, con dos caminos:
+**Si todavía no tiene un estilo propio guardado** (`5_Mi estilo/`), pregunta con dos caminos:
 
-«¿Qué estilo de animación quieres? Puedes mostrarme una cuenta de Instagram que te guste para que la imite (te explico cómo en 5 pasos), o usar el estilo que ya traigo cargado. Si eliges la cuenta, puedes hacerlo más adelante.»
+«¿Quieres que creemos tu propio estilo de animación a partir de referencias (una cuenta de Instagram que te guste), o elegimos uno de los estilos que ya traigo cargados? Te muestro las opciones.»
 
 **(a) Estilo propio por referencia.** Explícale los pasos:
 1. Entra a Instagram.
@@ -27,20 +27,24 @@ Al revisarlos (hojas de contactos, fotogramas, medición de cortes y sonidos, `b
 - **Da tu veredicto:** si crees que la cuenta usa un programa de efectos visuales (After Effects, Cinema 4D, Blender u otro) y **qué porcentaje de parecido puedes alcanzar** con tus herramientas (HTML + Three.js + FFmpeg), explicando qué partes saldrán iguales y cuáles no.
 - Guarda el resultado como ficha de estilo en `5_Mi estilo/` y ofrécele sumarla a su perfil.
 
-Si no quiere hacer los pasos ahora, puede dejarlos para después y usar el estilo por defecto.
+Si no quiere hacer los pasos ahora, puede dejarlos para después y elegir un estilo precargado.
 
-**(b) Estilo por defecto.** Pictogramas, mapas de líneas, imágenes reales, contadores, frases-tesis palabra a palabra y la línea quebrada como motivo, con objetos en 3D, fuente bíblica arriba y términos en griego o hebreo (estos dos, solo con contenido cristiano). Ubicación y tamaño de subtítulos, tarjetas y textos según §4.1. Si elige este camino, pregunta el color con dos opciones y muéstralas sobre una escena:
+**(b) Estilos precargados.** Mándale la hoja `references/estilos-animados/hoja_estilos.jpg` y preséntalos en una línea cada uno (tabla de `estilos-animados/README.md`), con tu recomendación según el tema del guion:
+- **Estilo de fábrica:** pictogramas, mapas de líneas, imágenes reales, contadores, frases-tesis palabra a palabra y la línea quebrada como motivo, con objetos en 3D, fuente bíblica arriba y términos en griego o hebreo (estos dos, solo con contenido cristiano). Ubicación y tamaño de subtítulos, tarjetas y textos según §4.1. Si lo elige, pregunta el color con dos opciones y muéstralas sobre una escena: «¿Con qué colores lo armamos? Te muestro las dos paletas sobre una escena: gris y crema, o azul noche y oro.»
+- **Escala sin fin · Caricatura de los 50 · RPG de 16 bits · Diorama de pixeles · Isla isométrica:** si elige uno, lee **solo** su archivo en `references/estilos-animados/` y síguelo junto con este manual (el estilo cambia el aspecto; tiempos, aire, subtítulo continuo, zona segura, storyboard y auditorías siguen siendo los de aquí).
 
-«¿Con qué colores lo armamos? Te muestro las dos paletas sobre una escena: gris y crema, o azul noche y oro.»
+**Si ya tiene un estilo propio guardado:** úsalo, pero recuérdale en una línea que puede elegir otro: «Lo armo en tu estilo de siempre; si quieres probar otro, tengo seis precargados (el de fábrica, escala sin fin, caricatura de los 50, RPG de 16 bits, diorama de pixeles e isla isométrica): te mando la hoja». Si dice que no, se sigue sin insistir.
 
-### 1.2 Materiales, siempre antes de editar
+### 1.2 Audio y recursos, siempre antes de animar
 
-No empieces hasta tener la voz y las imágenes (o la decisión de que las busques tú). Explica paso a paso cómo enviarlas:
+No empieces a animar hasta tener la voz, las imágenes (o la decisión de que las busques tú) y la respuesta sobre la música. **Recuérdaselo siempre, aunque no lo pregunte**, y explica paso a paso cómo enviarlas:
 
-«Antes de empezar necesito dos cosas: (1) la voz narradora y (2) las imágenes que quieras usar. Te explico cómo grabar la voz con tu celular y cómo guardar las imágenes. Cuando las tengas en la carpeta, avísame y arranco.»
+«Antes de animar necesito tres cosas: (1) la voz narradora, (2) las imágenes que quieras usar y (3) saber si quieres música. Te explico cómo grabar la voz con tu celular y cómo guardar las imágenes. Cuando las tengas en la carpeta, avísame y arranco.»
 
+- **Voz narradora: recomienda siempre la voz humana, la propia.** Con el guion terminado, se graba con la app de notas de voz del celular, en un lugar silencioso, a un palmo de la boca, sin música. Se lee el guion completo de corrido y, si hay un error, se repite la frase entera (tú detectas y quitas la toma fallida). El archivo (m4a, mp3 o wav) va en `1_Videos sin editar/<nombre>/` o adjunto en el chat.
+- **Voz sintética, solo si la pide** (no puede o no quiere grabar): ofrécela como recurso, no como recomendación. Dos caminos: que la genere en la app que ya use (por ejemplo CapCut) y la exporte como audio, o que la hagas tú con `scripts/voz_sintetica.py` (en el espacio en la nube; solo se sube el texto del guion). Primero mándale `voz_sintetica.py muestras` (tres voces leyendo la misma frase) para que elija. Con voz sintética se aplica el tramo de "voz con IA" de §1.3 (se respeta su cadencia).
 - **Imágenes:** en una carpeta con el nombre del video dentro de `4_Recursos/imagenes/` (o adjuntas en el chat), con nombres que digan qué son y en qué momento van (`01_retrato.jpg`, `02_taller.jpg`); de al menos 1080 px de ancho y sin marca de agua. Si no tiene, propón cuáles buscar y búscalas en sitios de dominio público o licencia libre (Wikimedia Commons, museos con CC0).
-- **Voz narradora (se recomienda la propia):** con el guion terminado, se graba con la app de notas de voz del celular, en un lugar silencioso, a un palmo de la boca, sin música. Se lee el guion completo de corrido y, si hay un error, se repite la frase entera (tú detectas y quitas la toma fallida). Si prefiere una voz con IA, que la exporte como audio. El archivo (m4a, mp3 o wav) va en `1_Videos sin editar/<nombre>/` o adjunto en el chat.
+- **Música (un recurso, no el valor por defecto):** por defecto va la cama grave bajo la voz (§6). Si el estilo elegido pide música (el RPG, la isla, la escala sin fin, la caricatura), pregúntale si la quiere: la cama hecha con código para ese estilo (`scripts/musica_estilo.py`), música real con licencia abierta (`buscar_sfx.py "…" --musica`), su propia música, o nada. Siempre bien por debajo de la voz.
 
 ### 1.3 Pasos
 

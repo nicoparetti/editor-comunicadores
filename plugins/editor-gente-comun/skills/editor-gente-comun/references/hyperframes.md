@@ -14,7 +14,7 @@ HyperFrames (HeyGen, licencia Apache 2.0) está instalado como **caja de herrami
 
 - 21 efectos de HyperFrames ya copiados en `4_Recursos/sfx_pixabay/` (licencia Pixabay: uso libre, comercial incluido). `manifest.json` describe cada uno (energía y uso recomendado).
 - El mapa de sonidos de la persona (`estilo-por-defecto.md` → Sonido) manda: estos son alternativas cuando un sonido del mapa no funciona.
-- La búsqueda en Openverse de `media-use` no está disponible (su cliente no pasa por el proxy).
+- La búsqueda en Openverse de `media-use` no está disponible (su cliente no pasa por el proxy). Para Openverse usa `buscar_sfx.py` en el espacio en la nube (`sonido-real-y-oido.md`).
 
 ## Color y looks
 

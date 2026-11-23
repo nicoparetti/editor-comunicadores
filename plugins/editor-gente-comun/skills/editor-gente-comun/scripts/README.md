@@ -17,6 +17,12 @@ Partes mecánicas del flujo. Requieren FFmpeg; los `.py` requieren Python 3 (y `
 | `extraer_frames.sh` | Analizador: cortes, primer/último fotograma de cada plano, fotogramas por intervalo | `extraer_frames.sh video.mp4 2_Referencias/<n>/datos [umbral] [intervalo]` |
 | `medir_ritmo.py` | Analizador: media, mediana, cortes por minuto (gancho y cuerpo) | `medir_ritmo.py 2_Referencias/<n>/datos [--gancho 30] [--excluir "245-269"]` |
 | `medir_sonido.py` | Analizador: golpes de sonido, nivel respecto a la voz, color, % de cortes con golpe | `medir_sonido.py video.mp4 2_Referencias/<n>/datos [--excluir …]` |
+| `buscar_sfx.py` | Sonido: busca y baja grabaciones reales CC0/CC BY de Openverse, hoja + escucha + créditos (**en la nube**) | `--temas` · `--tema shofar --oir` · `"wooden door" --max 4` · `--todos` |
+| `sonidos_biblicos.json` | Sonido: 51 temas bíblicos con su búsqueda en inglés | lo lee `buscar_sfx.py` |
+| `oido.sh` | Sonido: el oído (Earshot): revisar mezcla, elegir, A/B, grabado o sintético, perfil (**en la nube**) | `bash oido.sh revisar mezcla.mp3 "1.5,3.2"` |
+| `voz_sintetica.py` | Voz: narración sintética con Kokoro (abierta, sin conexión una vez instalada) **solo si la persona la pide**; 3 voces en español (**en la nube**) | `voz_sintetica.py muestras` · `voz_sintetica.py guion.txt --voz em_alex` |
+| `musica_estilo.py` | Música: cama hecha con código para los estilos precargados: `chip` (RPG), `campanas` (isla, diorama), `cosmos` (escala sin fin) | `musica_estilo.py chip --dur 62` |
+| `afinar_sfx.py` | Sonido: corre un sonido con tono hasta ±2 semitonos para que no desafine | `afinar_sfx.py s.wav --musica m.wav --en 12.4` |
 | `hoja_contactos.sh` | Revisión: un fotograma de TODOS los gráficos en una imagen | `hoja_contactos.sh 3_Videos editados/<n>/trabajo/entrega/2_GRAFICOS hoja.png [segundo] [columnas]` |
 | `zona_segura.py` | Revisión: superpone la zona segura unificada IG + TikTok sobre un fotograma 1080×1920 | `python3 zona_segura.py fotograma.png salida.jpg` |
 | `rejilla.sh` | Gráficos: rejilla de décimas sobre una captura para leer coordenadas | `rejilla.sh captura.png captura_rejilla.png` |
