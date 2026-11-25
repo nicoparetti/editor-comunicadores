@@ -7,7 +7,7 @@ La metodología completa y aprobada está en `clips-de-predicaciones.md`: pregun
 - Clips de ~60 s (aceptable 49–63 s), con 1 a 6 recortes y arco gancho → desarrollo → clímax → cierre.
 - Cortes exactos de lo que dijo, sin reescribir, con inicio y fin de cada recorte.
 - Prioridad a los momentos que marque la persona; luego ganchos que hablen directo a la audiencia, estructuras PRIMERO / SEGUNDO / TERCERO y cierres de manifiesto generacional.
-- Propuestas en una página con ranking, links a YouTube en cada segundo, intensidad, porqué y gancho sugerido. La persona aprueba antes de editar.
+- Propuestas en el hub de contenido, en una pestaña por video largo (`hub.md` → "Pestaña de clips"): ranking, links a YouTube en cada segundo, intensidad, porqué y gancho sugerido. La persona aprueba en el hub antes de editar.
 
 ## Recortar un bruto largo a reel: formato "guion tachado"
 

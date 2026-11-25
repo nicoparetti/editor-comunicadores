@@ -20,7 +20,9 @@ Portadas de cada video (siempre van con la entrega) · portadas de YouTube · ca
 
 ## Organización (`/hub`)
 
-Tu hub de contenido: una pestaña por cada contenido con guion, edición sugerida, recursos y copy, conectada al editor.
+Tu hub de contenido: una pestaña por cada contenido con guion, edición sugerida, recursos y copy, conectada al editor. Cuando sacas clips de una prédica o una clase, ese video largo tiene su propia pestaña con todos sus clips.
+
+¿Terminaste de instalar? Escribe "ya terminé con la configuración" (`/revisar-configuracion`) y reviso que esté todo completo.
 
 ## Los criterios que traigo
 

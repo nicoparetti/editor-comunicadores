@@ -1,6 +1,6 @@
 ---
 name: editor-gente-comun
-description: Editor para gente común. Editor de video e imagen para líderes, comunicadores y creadores que enseñan. Usar siempre que la persona pida editar un reel o video, poner o corregir subtítulos, sacar clips de una prédica, clase o video largo, montar un reel animado con su voz, crear gráficos animados, limpiar la voz, poner efectos de sonido, armar la entrega para CapCut, analizar un video de referencia, hacer portadas o carruseles, organizar su hub de contenido, cambiar su estilo (colores, fuentes, sonidos), o cuando diga "hola", "configura mi editor" o "qué sabes hacer", aunque no nombre el complemento.
+description: Editor para gente común. Editor de video e imagen para líderes, comunicadores y creadores que enseñan. Usar siempre que la persona pida editar un reel o video, poner o corregir subtítulos, sacar clips de una prédica, clase o video largo, montar un reel animado con su voz, crear gráficos animados, limpiar la voz, poner efectos de sonido, armar la entrega para CapCut, analizar un video de referencia, hacer portadas o carruseles, organizar su hub de contenido, cambiar su estilo (colores, fuentes, sonidos), o cuando diga "hola", "configura mi editor", "ya terminé con la configuración" o "qué sabes hacer", aunque no nombre el complemento.
 ---
 
 # Editor para gente común
@@ -15,6 +15,7 @@ Antes de cualquier trabajo, busca `5_Mi estilo/mi-perfil.md` en su carpeta de tr
 
 - **No existe → es la primera vez.** No edites nada todavía. Sigue `references/bienvenida.md`: preséntate, cuenta lo que sabes hacer, haz las preguntas iniciales, prepara su carpeta, guarda el perfil y arma su hub de contenido. Si llegó con un video para editar, haz la bienvenida corta y sigue con su pedido.
 - **Existe → léelo entero.** Manda sobre los criterios generales.
+- **"Ya terminé con la configuración"** (o `/revisar-configuracion`): sigue `references/revisar-configuracion.md` y comprueba punto por punto que la instalación quedó completa.
 - Lee también el archivo **"HUB - leer primero.md"** de los archivos del proyecto, si está: ahí está el enlace a su hub de contenido (`references/hub.md`).
 
 ## Prioridad de las decisiones
@@ -119,6 +120,7 @@ Lleva el estado en `3_Videos editados/<nombre>/ESTADO.md` (plantilla `templates/
 | Archivo | Cuándo |
 |---|---|
 | `references/bienvenida.md` | Primera vez o "configura mi editor" |
+| `references/revisar-configuracion.md` | "Ya terminé con la configuración": revisar que la instalación quedó completa |
 | `references/catalogo.md` | "¿Qué sabes hacer?" |
 | `references/hub.md` | Su hub de contenido |
 | `references/personalizar.md` | Cualquier cambio de estilo |

@@ -99,3 +99,5 @@ Termina con tres ejemplos de pedidos que puede hacer ya mismo, adaptados a lo qu
 - "Monta un reel animado con este audio."
 
 Y recuérdale que en cualquier momento puede escribir **"¿qué sabes hacer?"** (o `/que-sabes-hacer`) o **"cambia mi estilo"** (`/mi-estilo`).
+
+Y dile, en un párrafo aparte, que cuando sienta que terminó con la instalación y la configuración te escriba **"ya terminé con la configuración"** (o `/revisar-configuracion`): vas a revisar punto por punto si quedó todo completo y, si falta algo, lo resuelven juntos. Díselo también si la instalación sigue corriendo cuando termina la conversación, para que sepa cómo retomarla.

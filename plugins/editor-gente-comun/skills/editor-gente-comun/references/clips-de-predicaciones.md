@@ -68,12 +68,8 @@ Sin placa: el clip termina en la última palabra, con una salida de audio de 80 
   - quién era Bernabé antes de "¿de quién vas a ser el Bernabé?",
   - "¿qué puede hacer Dios cuando Satanás nos dice que somos anónimos?" para pasar del dato histórico a la persona que mira.
 - Quita las frases repetidas entre recortes o las que quedan sueltas (ej.: "Toda yo oro en el nombre de Jesús, que…" entre dos ideas que deben ir seguidas).
-- Presenta las propuestas en una **página (Artifact)** con:
-  - ranking,
-  - cada corte con su inicio y fin, link a YouTube en ese segundo y la frase,
-  - la intensidad de cada corte,
-  - el porqué y un texto de gancho sugerido.
-- **La persona aprueba antes de editar.**
+- Presenta las propuestas **en su hub de contenido**, en una pestaña por video largo ("Clips · <título>"), siguiendo `hub.md` → "Pestaña de clips": ficha, mapa de intensidad con los clips marcados, ranking con estados y un apartado por clip (cortes con inicio, fin, link a YouTube en ese segundo y la frase; porqué; gancho; nota de armado). Agrega una fila por clip en la pestaña Resumen. No armes una página ni un documento aparte.
+- **La persona aprueba en el hub antes de editar.** Lee sus comentarios y cambios de estado antes de empezar.
 
 ### 1.4 Propuestas de otras IA
 
