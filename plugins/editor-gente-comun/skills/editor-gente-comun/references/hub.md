@@ -48,6 +48,8 @@ Si no tienes la herramienta de documentos de Claude en la conversación, arma la
 
 ## Cómo se usa después
 
+- **Un chat para el hub, uno por video.** Recomiéndale trabajar el hub en un chat propio dentro del proyecto, llamado "Hub de contenidos" (ideas, guiones, clips propuestos), y abrir un chat nuevo por cada video que edite. Si te pide editar un video en el chat del hub, sugiérele abrir uno nuevo para ese video.
+
 - **Al editar:** si el contenido tiene pestaña, léela antes de la hoja de edición y respeta lo que diga; anota en la hoja los cambios respecto del plan.
 - **Al terminar:** actualiza el estado en el cuadro resumen (editado) y anota en la pestaña la ruta del video final y su portada. En los clips, actualiza la fila de ese clip en el Resumen y en el ranking, y completa su "Entrega".
 - **Ideas nuevas:** si la persona menciona una idea suelta, ofrécele anotarla en "Ideas en espera".

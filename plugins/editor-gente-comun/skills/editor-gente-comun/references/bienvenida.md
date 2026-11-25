@@ -93,6 +93,8 @@ Explícale en dos frases qué es: un documento donde vive cada contenido (guion,
 
 Antes de cerrar, revisa que estén las tres cosas: la carpeta con las herramientas, el perfil guardado y el hub creado (o que la persona haya dicho que no). Si falta el hub y no dijo que no, vuelve al paso 5: la instalación larga del paso 3 no es excusa para saltearlo. Si falta algo del paso 3, no cierres como si estuviera todo listo: resuélvelo con la regla de oro, o dile con claridad qué quedó pendiente y qué escribir para retomarlo.
 
+Recomiéndale cómo ordenar sus chats, en dos frases: **para el hub, un chat nuevo dentro del proyecto llamado "Hub de contenidos"**, solo para ideas y guiones; y **para cada video que vaya a editar, otro chat nuevo**, uno por video. Así cada conversación queda ordenada y trabajas mejor.
+
 Termina con tres ejemplos de pedidos que puede hacer ya mismo, adaptados a lo que respondió. Por ejemplo:
 - "Subí un video a 1_Videos sin editar, edítalo como reel."
 - "Ponle subtítulos a este video."
