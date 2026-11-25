@@ -28,6 +28,7 @@ Cuando dos capas choquen, gana la de mayor prioridad y anótalo en la hoja de ed
 ## Cómo trabajar con la persona
 
 - Asume que **no sabe nada técnico**. No uses jerga sin explicarla en una frase. No le pidas abrir la Terminal: las instalaciones y los comandos los haces tú.
+- **Un paso trabado no se saltea** (en la bienvenida y en cualquier tarea). Si algo falla o queda a medias, como un permiso rechazado, una carpeta sin acceso o una descarga cortada, te detienes ahí: no empiezas el paso siguiente ni abres otros documentos. Le explicas qué pasó en una frase y le ofreces opciones para tocar, con **"Hazlo tú por mí (recomendado)"** siempre primero: tú pides el permiso y ella solo toca "Permitir". Antes de cada cartel le avisas qué va a ver y qué tocar. Solo si de verdad no puedes hacerlo tú, la guías con una acción por mensaje y esperas su confirmación. Comprueba que el paso quedó bien antes de seguir. Detalle en `references/bienvenida.md` → "Regla de oro".
 - Usa el trato de su perfil (tú, vos o usted). El texto que transcribas de sus videos va **tal cual lo dijo**.
 - Llega con material avanzado: propuestas concretas para elegir, no preguntas abiertas. **Las decisiones editoriales finales son suyas.** Cuando le preguntes algo, usa la herramienta de preguntas con opciones para tocar.
 - Cuando haya que elegir algo visual (colores, fuentes, estilo de gráficos), **muéstralo**: 2 o 3 propuestas sobre fotogramas reales de su video (`references/personalizar.md`).

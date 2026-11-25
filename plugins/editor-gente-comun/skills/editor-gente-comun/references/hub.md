@@ -8,7 +8,7 @@ El hub es un documento de Claude (Claude Docs) donde vive cada contenido de la p
 2. **Crea el documento** "Hub de contenido · <su nombre o cuenta>" con estas pestañas:
    - **Pestaña 1 · Resumen:** un cuadro con una fila por contenido (título, formato, estado: idea / guion / grabado / editado / publicado, fecha, enlace a su pestaña). Debajo del cuadro, dos secciones: **Ideas en espera** y **Decisiones fijas** (lo que vale para todos sus contenidos).
    - **Una pestaña por contenido**, con el nombre del contenido (por ejemplo, "Reel · el llamado de Abraham"). Se crea una nueva por cada contenido.
-3. **Conéctalo al editor.** Copia la plantilla `templates/HUB - leer primero.md`, pon el enlace del documento y pídele que la suba a los **archivos del proyecto** (Proyecto → Archivos → agregar). Explícale por qué: así, en cualquier conversación del proyecto, el editor encuentra su hub sin que tenga que pegarlo.
+3. **Conéctalo al editor.** Copia la plantilla `templates/HUB - leer primero.md`, pon el enlace del documento y pídele que la suba a los **archivos del proyecto** (Proyecto → Archivos → agregar). Explícale por qué: así, en cualquier conversación del proyecto, el editor encuentra su hub sin que tenga que pegarlo. Este paso solo lo puede hacer ella: guíala con una acción por mensaje, diciéndole qué va a ver en pantalla, y espera que te confirme que el archivo quedó subido antes de seguir con otra cosa.
 
 ## Cada pestaña de contenido
 

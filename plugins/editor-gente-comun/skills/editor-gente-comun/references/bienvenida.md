@@ -2,6 +2,23 @@
 
 Objetivo: que la persona termine la primera conversación sabiendo qué puede pedirte, con su carpeta lista, un perfil inicial guardado y su hub de contenido creado. Tono cálido, frases cortas, cero jerga.
 
+## Regla de oro: un paso trabado no se saltea
+
+La persona que instala esto casi nunca sabe manejar Claude. Si avanzas con algo a medio hacer, no va a saber volver atrás ni arreglarlo sola. Por eso:
+
+1. **Los pasos van en orden y uno por vez.** Si uno falla o queda a medias (un permiso rechazado o que no apareció, una carpeta que no se pudo crear, una descarga cortada), te detienes ahí. No empiezas el paso siguiente, no abres el hub ni ningún documento al costado, y no le dejas tareas para "después".
+2. **Primero lo resuelves con ella.** Explícale en una frase qué pasó, sin jerga, y ofrécele opciones con la herramienta de preguntas (opciones para tocar). La primera opción, marcada como recomendada, es siempre que lo hagas tú:
+   - **"Hazlo tú por mí (recomendado)":** tú pides el permiso y ella solo toca "Permitir".
+   - "Prefiero hacerlo yo: guíame paso a paso."
+   - "Lo hacemos más tarde": en ese caso no sigues con nada más; le dices exactamente qué escribir para retomar (por ejemplo `/empezar`) y cierras ahí.
+3. **Antes de cada cartel, avísale qué va a ver y qué tocar.** Por ejemplo: *"Ahora te va a aparecer un cartel pidiendo acceso a tu Escritorio. Toca Permitir."* Recién después pides el permiso. Todo lo que necesite su computadora lo resuelves así: tú lo pides, ella acepta en pantalla.
+4. **Si rechaza el permiso o el cartel no aparece, no sigas.** Vuelve a ofrecerle las opciones del punto 2, contándole para qué sirve ese permiso.
+5. **Solo si de verdad no puedes hacerlo tú**, dale una sola acción por mensaje, describiendo lo que va a ver en pantalla, y espera que te confirme antes de seguir.
+6. **Al retomar, comprueba que el paso quedó bien** (la carpeta existe y está conectada, el permiso está dado, el archivo está en su lugar) antes de pasar al siguiente.
+7. **Nunca le pidas que cree carpetas, mueva archivos o abra la Terminal por su cuenta** si tú puedes hacerlo con su permiso.
+
+Esta regla vale para toda la bienvenida y para todo lo que hagas después con la herramienta.
+
 ## 1. Presentación (un solo mensaje)
 
 Usa este texto tal cual (solo adapta *ti/vos* si ya sabes cómo habla la persona):
@@ -44,8 +61,12 @@ Si la persona llegó con un video para editar, haz solo la tanda 1; el resto se 
 
 La carpeta **no viene con el complemento**: la armas tú ahora. Primero averigua si la computadora es Mac o Windows (`get_device_info`; si no queda claro, pregúntaselo).
 
+**No pases a los puntos 4 y 5 (perfil y hub) hasta que la carpeta exista, esté conectada y tenga el permiso de borrado.** Si algo de este punto se traba, aplica la regla de oro de arriba antes de seguir.
+
 1. **Ubica el Escritorio.** En Mac es `~/Desktop`. En Windows puede ser `~/Desktop` o `~/OneDrive/Desktop` (o `Escritorio`): revísalo con `device_list_dir` sobre la carpeta personal. Si ya existe `Editor de Videos IA` ahí, pide acceso solo a esa carpeta y salta al punto 3.
-2. **Crea la carpeta.** Pide acceso al Escritorio con `device_request_folder_access`, explicando el motivo en una frase: *"Te pido permiso para el Escritorio solo para crear la carpeta Editor de Videos IA, donde van a vivir tus videos. Después trabajo únicamente dentro de ella."* Créala con `mkdir`. Si la persona prefiere no dar ese permiso, pídele que cree ella una carpeta vacía con ese nombre exacto en el Escritorio y pide acceso solo a esa. Enseguida pide también el permiso de borrado sobre `Editor de Videos IA` (`device_request_delete_permission`), explicándole en una frase que sirve para limpiar los archivos temporales de cada edición y que nunca toca sus videos originales.
+2. **Crea la carpeta.** Avísale primero: *"Ahora te va a aparecer un cartel pidiendo acceso a tu Escritorio. Es solo para crear la carpeta Editor de Videos IA, donde van a vivir tus videos; después trabajo únicamente dentro de ella. Toca Permitir."* Pide el acceso con `device_request_folder_access` y crea la carpeta con `mkdir`. Comprueba con `device_list_dir` que quedó creada.
+   - **Si rechaza el permiso, el cartel no aparece o `mkdir` falla:** detente. No sigas con el punto 3 ni con nada más. Ofrécele las opciones de la regla de oro, con "Hazlo tú por mí (recomendado)" primero: vuelves a pedir el acceso, avisándole otra vez qué tocar. Solo si ella elige hacerlo por su cuenta, guíala para crear una carpeta vacía llamada exactamente `Editor de Videos IA` en el Escritorio, un paso por mensaje, y después pide acceso solo a esa carpeta.
+   - Con la carpeta creada, avísale del segundo cartel (*"Ahora te va a aparecer otro pidiendo permiso para borrar dentro de esa carpeta. Sirve para limpiar los archivos temporales de cada edición; nunca toca tus videos originales. Toca Permitir."*) y pide el permiso de borrado sobre `Editor de Videos IA` (`device_request_delete_permission`). Si lo rechaza, aplica la misma regla antes de seguir.
 3. **Baja la carpeta base desde GitHub** (una sola llamada de shell; trae sonidos, fuentes gratuitas, archivos de doble clic, scripts y plantillas; no pisa nada que ya exista):
    `rm -rf /tmp/egc && git clone -q --depth 1 https://github.com/nicoparetti/editor-gente-comun.git /tmp/egc && bash /tmp/egc/plugins/editor-gente-comun/skills/editor-gente-comun/scripts/instalar_carpeta.sh "$HOME/mnt/Editor de Videos IA"`
    Si `git` falla, baja el mismo repositorio con `curl -sSfL https://github.com/nicoparetti/editor-gente-comun/archive/refs/heads/main.tar.gz | tar -xz -C /tmp` y corre el script desde `/tmp/editor-gente-comun-main/…`.
@@ -70,7 +91,7 @@ Explícale en dos frases qué es: un documento donde vive cada contenido (guion,
 
 ## 6. Cierre
 
-Antes de cerrar, revisa que estén las tres cosas: la carpeta con las herramientas, el perfil guardado y el hub creado (o que la persona haya dicho que no). Si falta el hub y no dijo que no, vuelve al paso 5: la instalación larga del paso 3 no es excusa para saltearlo.
+Antes de cerrar, revisa que estén las tres cosas: la carpeta con las herramientas, el perfil guardado y el hub creado (o que la persona haya dicho que no). Si falta el hub y no dijo que no, vuelve al paso 5: la instalación larga del paso 3 no es excusa para saltearlo. Si falta algo del paso 3, no cierres como si estuviera todo listo: resuélvelo con la regla de oro, o dile con claridad qué quedó pendiente y qué escribir para retomarlo.
 
 Termina con tres ejemplos de pedidos que puede hacer ya mismo, adaptados a lo que respondió. Por ejemplo:
 - "Subí un video a 1_Videos sin editar, edítalo como reel."
