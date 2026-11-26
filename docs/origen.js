@@ -4,7 +4,7 @@ window.CONFIG = {
   // Pega aquí la dirección del script de Google (termina en /exec). Ver docs/LEEME-formulario.md
   urlFormulario: "https://formulario-editor.nicolas-paretti.workers.dev/",
   // ID del video de YouTube de instalación (lo que va después de watch?v=). Vacío = muestra "en preparación".
-  videoInstalacion: "",
+  videoInstalacion: "0rmr1rItnPA",
   instagram: "nicoyestefi",
   youtube: "nicoyestefi",
   repo: "https://github.com/nicoparetti/editor-gente-comun"
