@@ -102,8 +102,8 @@ Si la persona trae propuestas de otra IA (por ejemplo Gemini), verifícalas cont
    - un proxy de 960×540 (h264 veryfast, CRF 23),
    - el audio en WAV PCM.
 2. Analiza: rostros, cambios de cámara y silencios.
-3. Genera el recorrido del recorte (archivo `sendcmd`, ver 3.2).
-4. Renderiza un **HQ vertical nativo**: recorte de 1215×2160 del 4K que sigue al predicador, sin escalar, h264 CRF 15. Así los acercamientos posteriores no pierden calidad.
+3. Genera el recorrido del recorte con `scripts/seguimiento.py` (ver 3.3). El control anti-temblor tiene que decir APROBADO.
+4. Renderiza un **HQ vertical nativo** con el `filtro.txt` que escribe el script: recorte de 1216×2160 que sigue al predicador, h264 CRF 15. Así los acercamientos posteriores no pierden calidad. Si el original no es 4K, el filtro lo agranda a alto 2160 antes de recortar (ver 3.3).
 5. Edición fina, audio, subtítulos, placa y exportación final sobre los HQ.
 6. Entrega (sección 8): se guarda solo la final con subtítulos; la limpia y el `.srt`, en el chat.
 
@@ -111,8 +111,10 @@ Si la persona trae propuestas de otra IA (por ejemplo Gemini), verifícalas cont
 
 ### 3.1 Detección del predicador
 
+- **Siempre con `scripts/seguimiento.py`.** No reprogrames la detección ni el recorrido en cada pedido: las diferencias de ejecución entre una sesión y otra fueron las que hicieron temblar clips (ver 10.10). El script aplica todo lo de esta sección.
 - YuNet (OpenCV `FaceDetectorYN`), modelo `face_detection_yunet_2023mar.onnx`. Si hay que volver a bajarlo, viene de media.githubusercontent.com: raw.githubusercontent devuelve solo el puntero de LFS.
 - **No funcionan:** las Haar cascades (falsos positivos con las calcomanías de la laptop y con caras del público) ni el HOG de personas (el público lo tapa).
+- **Se detecta en todos los cuadros** (nunca cada 2 o 3 cuadros). Si por tiempo se detectara salteado, se interpola a todos los cuadros antes de recortar: el recorte nunca se mueve a escalones.
 - Solo cuentan las caras de la **mitad superior** de la imagen: el público está abajo.
 - **Cambios de cámara:** diferencia de histograma HSV con Bhattacharyya mayor a 0,3.
 - Dentro de cada plano:
@@ -124,13 +126,36 @@ Si la persona trae propuestas de otra IA (por ejemplo Gemini), verifícalas cont
 
 ### 3.2 Recorte
 
-- Ancho del recorte: 1215/3840 del cuadro, centrado en la cara y limitado a los bordes.
+- Ancho del recorte: 1216 px sobre una imagen de alto 2160 (≈1215/3840), centrado en la cara y limitado a los bordes. Posiciones en px enteros y `crop` con `exact=1`.
 - **Bug del cuadro de retraso:** `sendcmd` aplica el valor un cuadro tarde. En cada cambio de cámara, el primer cuadro mostraba la zona equivocada; parecía "un cuadro del público" y la persona lo detectó en 0:02 y 0:29.
   - Corrección: adelantar los comandos 0,04 s y poner como valor inicial del filtro de recorte la primera posición.
   - Verificación: buscar "cuadros de un solo cuadro" (dos diferencias grandes seguidas en el render). Tiene que dar cero.
 - **Planos abiertos desde el fondo** (cara de menos de 0,115 del alto del cuadro): acercamiento base de 1,3–1,4, porque si no domina el público.
 - Revisa una hoja de contactos de todo el clip (un cuadro cada 1–1,2 s). Si en algún plano se pierde al predicador, rehaz ese tramo desde el 4K con un recorrido corregido.
-- Normal: la pantalla del fondo (transmisión en vivo) puede mostrar "dos Nicos". No es un error del recorte.
+- Normal: la pantalla del fondo (transmisión en vivo) puede mostrar al predicador dos veces. No es un error del recorte.
+
+### 3.3 Seguimiento sin temblor (`scripts/seguimiento.py`)
+
+Corre en la computadora con el Python de `.herramientas/venv`. Tres pasos:
+
+1. `seguimiento.py detectar ORIGINAL --desde S --hasta S --carpeta trabajo/seg_clipN` → `det.json`: caras de todos los cuadros y el paneo de la cámara original (correlación de fase). Si una llamada no alcanza, el script corta a los 150 s y dice SIGUE: se vuelve a correr el mismo comando y continúa donde quedó.
+2. `seguimiento.py recorrido trabajo/seg_clipN` (modo `auto`) → `recorrido.json`, `cmd.txt`, `filtro.txt` y `control.txt`.
+3. Render con `ffmpeg -ss … -i ORIGINAL -t … -filter_complex_script trabajo/seg_clipN/filtro.txt …`.
+
+**Dos modos de movimiento:**
+- **seguir:** suavizado bidireccional (0,25) cuadro a cuadro. Solo para originales 4K (el detalle no se amplía) y si pasa el control.
+- **quieto:** el cuadro queda fijo mientras la cara se mueve dentro de una zona central (±18 % del ancho del recorte). Cuando sale, se mueve con aceleración y frenado (curva suave), en un tiempo según la distancia (0,6–2,5 s). Mientras la cámara original panea, el recorte espera, salvo que la cara se esté por salir (34 % del ancho). Es el modo para todo original menor que 4K, y la alternativa si `seguir` no aprueba.
+
+**Originales menores que 4K (Full HD, 2.7K):**
+- El filtro agranda a alto 2160 ("4K virtual") **antes** de recortar. Así el recorte se mueve de a fracciones de px de salida. Recortar el Full HD directo mueve el cuadro a saltitos de casi 4 px de salida y tiembla.
+- El detalle del original se amplía ×1,78 (Full HD). Pídele a la persona el archivo de mayor calidad que tenga (el 4K de la cámara si existe) antes de empezar; avísale si solo hay Full HD.
+
+**Control anti-temblor (obligatorio antes de entregar).** El script mide el recorrido en px de la salida y escribe `control.txt`:
+- saltos (movimientos aislados de un cuadro): máximo 25 %;
+- aceleración (rms de la segunda diferencia): máximo 3,0 px/cuadro²;
+- cambios de dirección: máximo 3 por segundo.
+
+Calibración: clips de prédica aprobados dan 1,4–1,8 de aceleración; el error de 10.10 daba 47. Si dice NO APROBADO, no se renderiza: probar `--modo quieto`, y si sigue fallando, mirar en la hoja de contactos qué plano falla y corregir ese tramo. `seguimiento.py control CARPETA` vuelve a medir un recorrido ya hecho.
 
 ## 4. Edición milimétrica: cortes y silencios
 
@@ -349,6 +374,7 @@ ffmpeg -i video.mp4 -i audio.wav -framerate 25 -i card/%03d.png -i card_sfx.wav 
 **Imagen**
 - [ ] Hoja de contactos de todo el clip: el predicador encuadrado en todos los planos.
 - [ ] Cero parpadeos de un cuadro en los cambios de cámara.
+- [ ] `control.txt` de cada clip dice APROBADO (seguimiento sin temblor, 3.3). Si el original no era 4K, se usó el modo quieto con el agrandado previo.
 - [ ] Los empalmes con salto alternan el acercamiento. No quedan planos de menos de 8 cuadros.
 - [ ] Los planos abiertos están acercados y no domina el público.
 
@@ -386,3 +412,4 @@ ffmpeg -i video.mp4 -i audio.wav -framerate 25 -i card/%03d.png -i card_sfx.wav 
 7. Interlineado fijo de 80 px: demasiado aire. Medir la tinta en cada bloque.
 8. Elementos de la placa que subían o rebotaban: descartado. Solo el fondo sube.
 9. Leyenda de la placa sin consultar: siempre preguntar el texto (sección 0) y no reutilizar el del clip anterior.
+10. Clips que "vibraban" (nov 2026, prédica en Full HD de otra persona): se detectó la cara cada 3 cuadros y el recorte se movió a escalones; el original Full HD se amplió casi al doble, y el recorte se movía encima de los paneos del camarógrafo. Las reglas eran las mismas, cambió la ejecución. Corrección: `scripts/seguimiento.py` siempre, detección en todos los cuadros, agrandado a 2160 antes de recortar, modo quieto para originales menores que 4K, y control anti-temblor APROBADO antes de entregar.

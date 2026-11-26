@@ -12,6 +12,7 @@ Partes mecánicas del flujo. Requieren FFmpeg; los `.py` requieren Python 3 (y `
 | `subtitulos.py` | Subtítulos con el estándar del editor → `.ass` + `.srt` | `subtitulos.py --palabras p.json --bloques b.txt --fin <s> --salida <ruta>` |
 | `verificar_subtitulos.py` | Mide tamaños, posiciones y anchos de un `.ass` | `verificar_subtitulos.py subs.ass` |
 | `recorte_persona.sh` | Recorta a la persona del fondo (HyperFrames, local), reanudable | `recorte_persona.sh <video> <ini> <fin> <carpeta> <salida.mov>` |
+| `seguimiento.py` | Clips verticales: detecta la cara en todos los cuadros, arma el recorrido sin temblor (modos seguir/quieto, agrandado a 2160 si el original es menor que 4K) y lo aprueba con el control anti-temblor | `seguimiento.py detectar VIDEO --desde S --hasta S --carpeta C` · `recorrido C [--modo auto\|seguir\|quieto]` · `control C` |
 | `masterizar_audio.py` | Audio final a −14 LUFS / ≤ −1 dBTP / 48 kHz, con la imagen intacta | `masterizar_audio.py in.mp4 out.mp4` |
 | `portada_yt.py` | Portada de YouTube | ver `../references/imagenes.md` |
 | `extraer_frames.sh` | Analizador: cortes, primer/último fotograma de cada plano, fotogramas por intervalo | `extraer_frames.sh video.mp4 2_Referencias/<n>/datos [umbral] [intervalo]` |
