@@ -1,10 +1,10 @@
 # Motor de gráficos
 
-La arquitectura que funciona tiene tres capas: un cerebro que decide (Claude con esta skill), un transcriptor con marcas de tiempo por palabra, y un motor que convierte código en vídeo. El motor de la persona es **Remotion** (React), en la carpeta `Motor/`. HyperFrames **no** se usa como motor de gráficos: solo sus herramientas sueltas (recorte de persona, SFX, color), ver `../hyperframes.md`. Antes de escribir código de Remotion, lee el manual oficial en `.herramientas/manuales/remotion/skills/` (empieza por `remotion-best-practices/SKILL.md`).
+La arquitectura que funciona tiene tres capas: un cerebro que decide (Claude con esta skill), un transcriptor con marcas de tiempo por palabra, y un motor que convierte código en vídeo. El motor de la persona es **Remotion** (React), en la carpeta `.herramientas/motor/`. HyperFrames **no** se usa como motor de gráficos: solo sus herramientas sueltas (recorte de persona, SFX, color), ver `../hyperframes.md`. Antes de escribir código de Remotion, lee el manual oficial en `.herramientas/manuales/remotion/skills/` (empieza por `remotion-best-practices/SKILL.md`).
 
 ## Principios
-- **Plantillas parametrizables.** Cada tipo de gráfico (contador, lista, tachado, rótulo, cortinilla, ventana de captura…) es una plantilla con variables (texto, cifra, imagen, duración). Se crean una vez en `Motor/` y se reutilizan; así todos los vídeos mantienen coherencia y cada gráfico nuevo es rápido.
-- **Solo tokens del perfil.** Colores, fuentes y tamaños vienen de `Motor/src/tokens.ts`, que sale de `references/estilo-por-defecto.md` (las fuentes se cargan en `Motor/src/fuentes.ts`). Nunca valores escritos a mano en un gráfico, ni los valores por defecto del motor.
+- **Plantillas parametrizables.** Cada tipo de gráfico (contador, lista, tachado, rótulo, cortinilla, ventana de captura…) es una plantilla con variables (texto, cifra, imagen, duración). Se crean una vez en `.herramientas/motor/` y se reutilizan; así todos los vídeos mantienen coherencia y cada gráfico nuevo es rápido.
+- **Solo tokens del perfil.** Colores, fuentes y tamaños vienen de `.herramientas/motor/src/tokens.ts`, que sale de `references/estilo-por-defecto.md` (las fuentes se cargan en `.herramientas/motor/src/fuentes.ts`). Nunca valores escritos a mano en un gráfico, ni los valores por defecto del motor.
 - **Un gráfico, una composición**, con la duración exacta del tramo del transcript.
 - **El texto se ajusta midiéndolo, nunca contando letras.** El ancho de una palabra no depende de cuántas letras tiene. Mide el ancho real renderizado y reduce el tamaño en pasos pequeños hasta que quepa (en Remotion: `fitText` / `measureText` de `@remotion/layout-utils`; en HTML: comparar `scrollWidth` con el ancho de la caja).
 
@@ -22,4 +22,4 @@ Los gráficos se renderizan con canal alfa para superponerlos:
 Guarda la colocación de todos los elementos (gráficos, subtítulos, SFX) en un único `3_Videos editados/<nombre>/trabajo/timeline.json` con pista, capa, inicio y duración. Es la fuente de verdad: la vista previa, la entrega y las notas se generan desde ahí. Dos gráficos que se solapan en el tiempo van en capas distintas.
 
 ## Revisión barata antes del render
-Antes de renderizar un gráfico completo, renderiza un solo fotograma en el momento de máxima información (`npx remotion still src/index.ts <Composicion> salida.png --frame=<n>` dentro de `Motor/`) y revísalo. Un fotograma tarda segundos; un render, minutos.
+Antes de renderizar un gráfico completo, renderiza un solo fotograma en el momento de máxima información (`npx remotion still src/index.ts <Composicion> salida.png --frame=<n>` dentro de `.herramientas/motor/`) y revísalo. Un fotograma tarda segundos; un render, minutos.

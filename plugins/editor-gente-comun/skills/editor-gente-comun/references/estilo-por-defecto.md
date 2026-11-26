@@ -158,7 +158,7 @@ No menciones LUT ni corrección de color. Solo si la persona pregunta si puedes 
 
 ## 9. Diseño de gráficos y versículos
 
-- **Estilo de gráficos por defecto: "Continuidad"**: Cal Sans + complementaria crema sobre tarjetas oscuras translúcidas (radio 26), inserts a pantalla completa en papel claro con rótulos cartográficos. Valores en `Motor/src/tokens.ts`. El estilo puede cambiar por video (tableros de estilo); los lineamientos de formatos, animación, sonido, cortes y zooms de `reels-con-graficos.md` se mantienen.
+- **Estilo de gráficos por defecto: "Continuidad"**: Cal Sans + complementaria crema sobre tarjetas oscuras translúcidas (radio 26), inserts a pantalla completa en papel claro con rótulos cartográficos. Valores en `.herramientas/motor/src/tokens.ts`. El estilo puede cambiar por video (tableros de estilo); los lineamientos de formatos, animación, sonido, cortes y zooms de `reels-con-graficos.md` se mantienen.
 - Íconos: trazo fino, un solo color. No redibujar logos: se usan reales (`4_Recursos/logo/`).
 - **Versículos** (solo con contenido cristiano): en la versión bíblica del perfil. Verificar siempre el texto con búsqueda web antes de ponerlo en pantalla. Formato: texto en cursiva y debajo la cita (libro capítulo:versículos, versión). La precisión bíblica no es negociable.
 - Datos en pantalla: arrancar con el número duro, no con "un estudio dice…". Verificar cifras.

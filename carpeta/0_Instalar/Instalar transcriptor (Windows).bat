@@ -8,6 +8,7 @@ echo.
 echo Descargando el modelo de transcripción (~1,6 GB). Puede tardar unos minutos...
 echo.
 curl.exe -L -C - --fail -o ".herramientas\whisper\ggml-large-v3-turbo.bin.parcial" "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin"
+set TAM=0
 for %%A in (".herramientas\whisper\ggml-large-v3-turbo.bin.parcial") do set TAM=%%~zA
 if %TAM% GTR 1500000000 (
   move /y ".herramientas\whisper\ggml-large-v3-turbo.bin.parcial" ".herramientas\whisper\ggml-large-v3-turbo.bin" >nul

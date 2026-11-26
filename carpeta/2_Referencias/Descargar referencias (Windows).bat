@@ -12,13 +12,13 @@ echo LISTO. Los videos están en 2_Referencias. Cuando quieras, vaciá links.txt
 pause
 exit /b 0
 :bajar
-set URL=%~1
-set NOM=%~2
+set "URL=%~1"
+set "NOM=%~2"
 if "%URL%"=="" exit /b 0
 if "%URL:~0,1%"=="#" exit /b 0
 if "%NOM%"=="" set NOM=%%(uploader_id,uploader^|ref)s-%%(id)s
 echo.
-echo - %URL%
+echo - "%URL%"
 "%Y%" --ffmpeg-location "%F%" -f "bv*[height<=1920][ext=mp4]+ba[ext=m4a]/bv*+ba/b" --merge-output-format mp4 --no-playlist --write-info-json --no-overwrites -o "2_Referencias\%NOM%\video.%%(ext)s" "%URL%"
 if errorlevel 1 (
   echo    Reintento con la sesión de Chrome ^(para Instagram o videos que piden iniciar sesión^)...

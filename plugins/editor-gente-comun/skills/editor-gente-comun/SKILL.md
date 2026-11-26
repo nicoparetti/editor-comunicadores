@@ -132,7 +132,6 @@ Lleva el estado en `3_Videos editados/<nombre>/ESTADO.md` (plantilla `templates/
 | `references/sonido-real-y-oido.md` | Buscar sonidos y música reales con licencia abierta, revisar la mezcla con el oído, afinar sonidos con tono |
 | `references/portadas.md` · `imagenes.md` | Portadas, carruseles, placas |
 | `references/efectos.md` | Catálogo de efectos, cuándo usar cada uno |
-| `references/kit-graficos.md` · `imagenes-animables.md` | Gráficos reutilizables e imágenes que se pueden animar |
 | `references/hyperframes.md` | Recorte de persona, sonidos extra |
 | `references/banco-sfx.md` | Banco de sonidos y su puntaje |
 | `references/base/` | Criterios generales de cada etapa |

@@ -8,15 +8,17 @@ import {openBrowser, renderMedia, renderStill, selectComposition} from '@remotio
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
+import {fileURLToPath} from 'node:url';
 
 const [modo, comp, salida, extra] = process.argv.slice(2);
 const opt = (n, d) => { const i = process.argv.indexOf('--' + n); return i > 0 ? process.argv[i + 1] : d; };
-const raiz = path.dirname(new URL(import.meta.url).pathname.replace(/%20/g, ' '));
+const raiz = path.dirname(fileURLToPath(import.meta.url));
 
 // El empaquetado copia public/; para no duplicar el vídeo base (1,5 GB) se empaqueta con una carpeta pública
 // vacía y se enlaza la real dentro del paquete.
 const vacio = path.join(raiz, '.public-vacio'); fs.mkdirSync(vacio, {recursive: true});
-const outDir = path.join(raiz, '.bundle');
+// el paquete va en /tmp: ahí se puede borrar y enlazar sin permisos (también en Windows)
+const outDir = path.join(os.tmpdir(), 'motor-bundle');
 fs.rmSync(outDir, {recursive: true, force: true});
 const serveUrl = await bundle({entryPoint: path.join(raiz, 'src/index.ts'), outDir, publicDir: vacio});
 const pub = path.join(outDir, 'public');
@@ -24,7 +26,9 @@ fs.rmSync(pub, {recursive: true, force: true});
 fs.symlinkSync(path.join(raiz, 'public'), pub);
 
 const hilos = Number(opt('hilos', 4)); // con 6 hilos el render falló por tiempo de espera
-const browserExecutable = path.join(raiz, '..', '.herramientas', 'chromium', 'bin', 'chromium');
+// Chromium de .herramientas: el motor puede estar en .herramientas/motor o en Motor/ (raíz de la carpeta)
+const candidatos = [process.env.CHROMIUM_BIN, path.join(raiz, '..', 'chromium', 'bin', 'chromium'), path.join(raiz, '..', '.herramientas', 'chromium', 'bin', 'chromium')].filter(Boolean);
+const browserExecutable = candidatos.find((p) => fs.existsSync(p)) || candidatos[candidatos.length - 1];
 const chromiumOptions = {gl: 'swangle'};
 const escala = Number(opt('escala', 1));
 

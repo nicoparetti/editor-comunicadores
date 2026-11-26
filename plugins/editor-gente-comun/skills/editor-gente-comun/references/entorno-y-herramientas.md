@@ -29,6 +29,7 @@ El acceso a internet sigue la lista de dominios permitidos de la cuenta.
   - El transcriptor primero lo bajas tú con `preparar_entorno.sh modelo` (por tramos). Solo si da `[BLOQUEADO]`: `0_Instalar/Descargar transcriptor` (página que abre la descarga en su navegador) → la persona arrastra el archivo a `0_Instalar/` y corres `preparar_entorno.sh modelo`. Plan B: `0_Instalar/Instalar transcriptor` (`.command` o `(Windows).bat`), que lo baja directo a `.herramientas/whisper/` (reanudable).
   - `2_Referencias/Descargar referencias` (`.command` o `(Windows).bat`) → baja los links de `2_Referencias/links.txt` con yt-dlp + ffmpeg de su sistema (`.herramientas/mac/` o `.herramientas/win/`); si un link pide sesión (Instagram), reintenta con las cookies de Chrome.
 - **En Windows** la máquina Linux es x64 (en Mac con chip Apple, arm64): `preparar_entorno.sh` elige solo la versión de Chromium. Los `.command` no abren en Windows: sus equivalentes son los `.bat` de `0_Instalar/` y `2_Referencias/`, que usan `yt-dlp.exe` y `ffmpeg.exe` de `.herramientas/win/` (paso `win`). Si Windows muestra "Windows protegió tu PC", la persona toca Más información → Ejecutar de todas formas.
+- **Windows: carpeta compartida con límites.** En algunas PC con Windows la carpeta conectada no admite enlaces simbólicos. `preparar_entorno.sh` lo detecta solo (aviso "La carpeta no admite enlaces"): arma el venv en `/tmp/egc-venv` con lanzadores en `.herramientas/venv/bin` (los mismos caminos de siempre) e instala los paquetes de npm sin enlaces. Como `/tmp` se borra entre sesiones, al empezar cada sesión el estado va a pedir otra vez el paso `venv` (tarda menos de un minuto): córrelo sin preguntar. Si el estado avisa "La carpeta no deja ejecutar programas", copia `whisper-cli` y la carpeta `chromium/bin` a `/tmp/egc-bin/` y usa esas copias (`WHISPER_BIN`, `CHROMIUM_BIN`) en esa sesión. Si un paso falla de otra forma solo en Windows, no lo saltes: muéstrale el error a la persona en palabras simples y ofrécele resolverlo tú (regla de oro).
 - **Espacio en la nube**: llega a Openverse, huggingface.co y PyPI. La búsqueda de sonidos (`buscar_sfx.py`) y el oído (`oido.sh`) corren ahí y se reinstalan solos en cada sesión. A la nube solo se sube audio, nunca brutos.
 - Paquetes npm que descargan binarios con su propio cliente fallan con 407: instala con `--ignore-scripts`.
 
@@ -41,7 +42,7 @@ El acceso a internet sigue la lista de dominios permitidos de la cuenta.
 | venv | `.herramientas/venv` | Python con PIL y numpy, `cmake` |
 | yt-dlp + ffmpeg para macOS | `.herramientas/mac/` | Los usan los `.command` con la conexión de la Mac |
 | Chromium 143 arm64 | `.herramientas/chromium/bin/chromium` | Render de Remotion, HyperFrames y HTML (carruseles) |
-| Motor Remotion 4 | `Motor/` | Motion graphics (ver `base/motor-graficos.md`) |
+| Motor Remotion 4 | `.herramientas/motor/` | Motion graphics (ver `base/motor-graficos.md`) |
 | HyperFrames CLI | `.herramientas/hyperframes` | Recorte de persona, color, SFX (ver `hyperframes.md`) |
 | whisper.cpp | `.herramientas/whisper/bin/whisper-cli` | Transcripción por palabra con DTW |
 | Manuales oficiales | `.herramientas/manuales/remotion`, `.herramientas/manuales/hyperframes` | Leer antes de escribir código para esos motores |
@@ -85,9 +86,9 @@ Los parámetros de la persona (golpe de zoom ~130 % en el corte, escalera 120 �
 
 ## Motor de gráficos (Remotion)
 
-- `cd Motor` y luego `npx remotion still src/index.ts <Composicion> salida.png --frame=<n>` para revisar un fotograma, o `node render.mjs capas <Composicion> <carpeta> <timeline.json>` para un `.mov` ProRes 4444 por gráfico. `remotion.config.ts` y `render.mjs` ya apuntan al Chromium de `.herramientas` y usan 4 hilos.
+- `cd .herramientas/motor` y luego `npx remotion still src/index.ts <Composicion> salida.png --frame=<n>` para revisar un fotograma, o `node render.mjs capas <Composicion> <carpeta> <timeline.json>` para un `.mov` ProRes 4444 por gráfico. `remotion.config.ts` y `render.mjs` ya apuntan al Chromium de `.herramientas` y usan 4 hilos.
 - Un render largo no cabe en 180 s: renderiza por gráfico (`capas`) o por rangos (`--frames a-b`) y une con FFmpeg.
-- Fuentes del motor en `Motor/public/fuentes/` (cargadas en `src/fuentes.ts`). Si agregas una, cópiala ahí y regístrala.
+- Fuentes del motor en `.herramientas/motor/public/fuentes/` (cargadas en `src/fuentes.ts`). Si agregas una, cópiala ahí y regístrala.
 - Gráficos con alfa: ProRes 4444. Si en CapCut sale con fondo negro: `ffmpeg -i grafico.mov -c:v qtrle grafico_qtrle.mov`.
 - Las plantillas (`Texto`, `Tarjetas`, `Abajo`, `Chips`, `Miniaturas`) son genéricas: re-tematízalas con los tokens de la persona y revisa sus textos de ejemplo antes de usarlas.
 

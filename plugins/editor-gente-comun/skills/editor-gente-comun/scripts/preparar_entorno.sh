@@ -12,6 +12,32 @@ case "$(uname -m)" in aarch64|arm64) ARQ=arm64 ;; *) ARQ=x64 ;; esac   # Mac con
 CHROMIUM_PACK="https://github.com/Sparticuz/chromium/releases/download/v143.0.4/chromium-v143.0.4-pack.$ARQ.tar"
 U2NET="https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net_human_seg.onnx"
 ok(){ printf "  [OK]   %s\n" "$1"; }; falta(){ printf "  [FALTA] %s → %s\n" "$1" "$2"; }
+# Algunas carpetas compartidas (posible en Windows) no admiten enlaces simbólicos: venv y npm los usan.
+# En ese caso el venv vive en /tmp (se rearma solo en cada sesión con el paso venv) y npm instala sin enlaces.
+sin_enlaces() {
+  [ "${EGC_SIN_ENLACES:-}" = 1 ] && return 0
+  local t="$H/pruebas/.enlace"; mkdir -p "$H/pruebas" 2>/dev/null
+  [ -L "$t" ] && return 1
+  ln -s . "$t" 2>/dev/null && [ -L "$t" ] && return 1
+  return 0
+}
+VENV_TMP=/tmp/egc-venv
+# Crea en node_modules/.bin un lanzador (archivo común, no enlace) por cada comando de los paquetes instalados
+crear_bins() {
+  node -e '
+    const fs=require("fs"),path=require("path"),nm=path.join(process.argv[1],"node_modules"),bin=path.join(nm,".bin");
+    fs.mkdirSync(bin,{recursive:true});
+    for (const d of fs.readdirSync(nm)) {
+      if (d===".bin") continue;
+      const ps=d.startsWith("@")?fs.readdirSync(path.join(nm,d)).map(x=>d+"/"+x):[d];
+      for (const p of ps) {
+        let pj; try { pj=JSON.parse(fs.readFileSync(path.join(nm,p,"package.json"),"utf8")); } catch(e) { continue; }
+        let b=pj.bin; if (!b) continue; if (typeof b==="string") b={[pj.name.split("/").pop()]:b};
+        for (const [n,f] of Object.entries(b)) { const w=path.join(bin,n); if (fs.existsSync(w)) continue;
+          fs.writeFileSync(w,"#!/bin/sh\nexec node \"$(dirname \"$0\")/../"+p+"/"+f+"\" \"$@\"\n",{mode:0o755}); }
+      }
+    }' "$1"
+}
 
 estado() {
   echo "Carpeta de trabajo: $R"
@@ -19,7 +45,10 @@ estado() {
   ENC="$(ffmpeg -hide_banner -encoders 2>/dev/null || true)"; FIL="$(ffmpeg -hide_banner -filters 2>/dev/null || true)"
   [[ "$ENC" == *prores_ks* && "$ENC" == *libx264* && "$FIL" == *subtitles* ]] && ok "FFmpeg $(ffmpeg -version | head -1 | cut -d' ' -f3) con ProRes, x264 y libass" || falta "FFmpeg" "no hay FFmpeg con ProRes/x264/libass en la máquina: avisar a la persona"
   python3 -c "import PIL, numpy" 2>/dev/null && ok "Python ($(command -v python3)) con PIL y numpy" || falta "PIL/numpy" "paso venv"
-  [ -x "$H/venv/bin/python" ] && ok "venv (.herramientas/venv)" || falta "venv" "paso venv"
+  "$H/venv/bin/python" -c 1 2>/dev/null && ok "venv (.herramientas/venv)" || falta "venv" "paso venv"
+  sin_enlaces && echo "  [AVISO] La carpeta no admite enlaces: el venv vive en /tmp y se rearma en cada sesión con el paso venv"
+  mkdir -p "$H/pruebas" 2>/dev/null; printf '#!/bin/sh\nexit 0\n' > "$H/pruebas/ejec.sh" 2>/dev/null; chmod +x "$H/pruebas/ejec.sh" 2>/dev/null
+  "$H/pruebas/ejec.sh" 2>/dev/null || echo "  [AVISO] La carpeta no deja ejecutar programas: copia whisper-cli y Chromium a /tmp/egc-bin y úsalos desde ahí (entorno-y-herramientas.md → Windows)"
   [ -x "$H/venv/bin/yt-dlp" ] && ok "yt-dlp" || falta "yt-dlp" "paso venv"
   [ -x "$CHROMIUM_BIN" ] && "$CHROMIUM_BIN" --version >/dev/null 2>&1 && ok "Chromium $ARQ ($("$CHROMIUM_BIN" --version 2>/dev/null))" || falta "Chromium" "paso chromium"
   [ -f "$R/.herramientas/motor/node_modules/remotion/dist/cjs/index.js" ] && ok "Motor Remotion (node_modules)" || falta "Motor Remotion" "paso motor"
@@ -42,8 +71,19 @@ case "${1:-estado}" in
     mkdir -p "$R/1_Videos sin editar" "$R/2_Referencias" "$R/3_Videos editados" "$R/5_Mi estilo/tableros" "$H/motor" "$R"/4_Recursos/{fuentes,sfx,musica,luts,logo,imagenes} "$H"/{scripts,whisper/bin,modelos,manuales,pruebas}
     ok "carpetas" ;;
   venv)
-    [ -x "$H/venv/bin/python" ] || python3 -m venv "$H/venv"
-    timeout 170 "$H/venv/bin/pip" install -q --upgrade yt-dlp cmake pillow numpy fonttools opencv-python-headless==4.10.0.84 && ok "venv con yt-dlp, cmake, PIL y numpy" ;;
+    PAQ="yt-dlp cmake pillow numpy fonttools opencv-python-headless==4.10.0.84"
+    if sin_enlaces; then
+      # venv en /tmp y lanzadores comunes en .herramientas/venv/bin (mismo camino para todos los scripts)
+      [ -x "$VENV_TMP/bin/python" ] || python3 -m venv "$VENV_TMP"
+      timeout 170 "$VENV_TMP/bin/pip" install -q --upgrade $PAQ || exit 1
+      mkdir -p "$H/venv/bin"
+      for b in "$VENV_TMP"/bin/*; do n="$(basename "$b")"; case "$n" in activate*|Activate*) continue ;; esac
+        printf '#!/bin/sh\nexec "%s" "$@"\n' "$b" > "$H/venv/bin/$n"; chmod +x "$H/venv/bin/$n" 2>/dev/null; done
+      "$H/venv/bin/python" -c "import PIL, numpy, cv2" && ok "venv en /tmp (carpeta sin enlaces) con yt-dlp, cmake, PIL y numpy"
+    else
+      [ -x "$H/venv/bin/python" ] || python3 -m venv "$H/venv"
+      timeout 170 "$H/venv/bin/pip" install -q --upgrade $PAQ && ok "venv con yt-dlp, cmake, PIL y numpy"
+    fi ;;
   chromium)
     # se descarga y descomprime en /tmp: así no quedan restos en la carpeta (borrar ahí necesita permiso)
     mkdir -p "$H/chromium/bin" /tmp/chromium-pack && cd /tmp/chromium-pack || exit 1
@@ -57,10 +97,12 @@ case "${1:-estado}" in
     [ -f "$H/motor/package.json" ] || { [ -d "$H/plantillas/motor" ] && cp -R "$H/plantillas/motor/." "$H/motor/"; }
     [ -f "$H/motor/package.json" ] || { echo "Falta el proyecto del motor: correr instalar_carpeta.sh (bienvenida, paso 3)"; exit 1; }
     mkdir -p "$H/motor/public/fuentes" "$H/motor/public/mock" && cp "$R"/4_Recursos/fuentes/*.ttf "$H/motor/public/fuentes/" 2>/dev/null
-    cd "$H/motor" && timeout 170 npm install --ignore-scripts --no-audit --no-fund --loglevel=error && ok "Motor Remotion" ;;
+    NB=""; sin_enlaces && NB="--no-bin-links"
+    cd "$H/motor" && timeout 170 npm install --ignore-scripts --no-audit --no-fund --loglevel=error $NB && { [ -z "$NB" ] || crear_bins "$H/motor"; } && ok "Motor Remotion" ;;
   hyperframes)
     mkdir -p "$H/hyperframes" && cd "$H/hyperframes" && { [ -f package.json ] || npm init -y >/dev/null; }
-    timeout 170 npm install hyperframes@latest onnxruntime-node@1.21.1 --ignore-scripts --no-audit --no-fund --loglevel=error && ok "HyperFrames CLI"
+    NB=""; sin_enlaces && NB="--no-bin-links"
+    timeout 170 npm install hyperframes@latest onnxruntime-node@1.21.1 --ignore-scripts --no-audit --no-fund --loglevel=error $NB && { [ -z "$NB" ] || crear_bins "$H/hyperframes"; } && ok "HyperFrames CLI"
     npx hyperframes telemetry disable >/dev/null 2>&1 || true
     S="$H/hyperframes/node_modules/hyperframes/dist/skills/media-use/audio/assets/sfx"
     [ -d "$S" ] && mkdir -p "$R/4_Recursos/sfx_pixabay" && cp "$S"/* "$R/4_Recursos/sfx_pixabay/" && ok "sonidos de la biblioteca de HyperFrames en 4_Recursos/sfx_pixabay" ;;
@@ -91,7 +133,7 @@ case "${1:-estado}" in
     # se clona en /tmp (git no puede trabajar bien dentro de la carpeta compartida) y se copia sin .git
     mkdir -p "$H/manuales" && rm -rf /tmp/remotion-skills && timeout 90 git clone -q --depth 1 https://github.com/remotion-dev/skills.git /tmp/remotion-skills \
       && rm -rf /tmp/remotion-skills/.git && mkdir -p "$H/manuales/remotion" && cp -R /tmp/remotion-skills/. "$H/manuales/remotion/" && cd "$H/manuales"
-    ln -sfn ../hyperframes/node_modules/hyperframes/dist/skills hyperframes && ok "manuales" ;;
+    if sin_enlaces; then mkdir -p hyperframes && cp -R ../hyperframes/node_modules/hyperframes/dist/skills/. hyperframes/; else ln -sfn ../hyperframes/node_modules/hyperframes/dist/skills hyperframes; fi && ok "manuales" ;;
   mac)
     mkdir -p "$H/mac" && cd "$H/mac" && { [ -x yt-dlp_macos ] || timeout 80 curl -sSfL -o yt-dlp_macos https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos; } \
       && { [ -x ffmpeg ] || timeout 90 curl -sSfL -o ffmpeg https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1/ffmpeg-darwin-arm64; } \
